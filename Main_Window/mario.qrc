@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>grass.png</file>
+        <file>ground.png</file>
+        <file>sky.png</file>
+        <file>Scene.png</file>
+        <file>Mario.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>Ani.qml</file>
+        <file>AniForm.ui.qml</file>
+    </qresource>
+</RCC>
