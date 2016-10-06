@@ -19,3 +19,6 @@ HEADERS  += about_dialog.h
 
 FORMS    += about_dialog.ui
 CONFIG += c++11
+
+RESOURCES += \
+    mario.qrc

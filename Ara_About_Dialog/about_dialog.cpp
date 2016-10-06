@@ -8,48 +8,20 @@ About_Dialog::About_Dialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Mario: About");
 
+
     this->mainVBox = new QVBoxLayout;
-    /*
-    this->schoolInfo = new QHBoxLayout;
-    this->classInfo = new QHBoxLayout;
-    this->groupMember1 = new QHBoxLayout;
-    this->groupMember2 = new QHBoxLayout;
-    this->groupMember3 = new QHBoxLayout;
-    this->groupMember4 = new QHBoxLayout;
-    this->groupMember5 = new QHBoxLayout;
-    this->groupMember6 = new QHBoxLayout;
-    this->groupMember7 = new QHBoxLayout;
-    this->groupMember8 = new QHBoxLayout;
 
-    this->aboutMem1 = new QFormLayout;
-    this->aboutMem2 = new QFormLayout;
-    this->aboutMem3 = new QFormLayout;
-    this->aboutMem4 = new QFormLayout;
-    this->aboutMem5 = new QFormLayout;
-    this->aboutMem6 = new QFormLayout;
-    this->aboutMem7 = new QFormLayout;
-    this->aboutMem8 = new QFormLayout;
+    this->logo = new QPixmap(":/images/Mario_Logo_Bar.tif");
+    logoLbl = new QLabel;
+    logoLbl->setPixmap(*logo);
+    logoLbl->setContentsMargins(0,0,0,2);
 
-    groupMember1->addLayout(aboutMem1);
-    groupMember2->addLayout(aboutMem2);
-    groupMember3->addLayout(aboutMem3);
-    groupMember4->addLayout(aboutMem4);
-    groupMember5->addLayout(aboutMem5);
-    groupMember6->addLayout(aboutMem6);
-    groupMember7->addLayout(aboutMem7);
-    groupMember8->addLayout(aboutMem8);
+    this->spacerBar = new QPixmap(":/images/Spacer_Bar.tif");
+    this->spacerLabel = new QLabel;
+    spacerLabel->setPixmap(*spacerBar);
+    spacerLabel->setContentsMargins(20,8,0,3);
 
-    mainVBox->addLayout(schoolInfo);
-    mainVBox->addLayout(classInfo);
-    mainVBox->addLayout(groupMember1);
-    mainVBox->addLayout(groupMember2);
-    mainVBox->addLayout(groupMember3);
-    mainVBox->addLayout(groupMember4);
-    mainVBox->addLayout(groupMember5);
-    mainVBox->addLayout(groupMember6);
-    mainVBox->addLayout(groupMember7);
-    mainVBox->addLayout(groupMember8);
-    */
+
 
     this->schoolInfo = new QLabel;
     this->classInfo = new QLabel;
@@ -65,25 +37,32 @@ About_Dialog::About_Dialog(QWidget *parent) :
     this->setLayout(mainVBox);
     mainVBox->setAlignment(Qt::AlignTop | Qt::AlignCenter);
 
+    mainVBox->addWidget(logoLbl);
+    logoLbl->show();
 
 
     mainVBox->addWidget(schoolInfo);
     mainVBox->addWidget(classInfo);
+    mainVBox->addWidget(spacerLabel);
     mainVBox->addWidget(groupMember1);
 
     schoolInfo->show();
+    schoolInfo->setAlignment(Qt::AlignCenter);
     schoolInfo->setText("RCC | Fall 2016");
     schoolInfo->setTextFormat(Qt::RichText);
     schoolInfo->setTextInteractionFlags(Qt::TextBrowserInteraction);
     schoolInfo->setOpenExternalLinks(true);
+    schoolInfo->setContentsMargins(0,0,14,0);
 
     classInfo->show();
-    classInfo->setText("CIS 17B | Group Project");
+    classInfo->setAlignment(Qt::AlignCenter);
+    classInfo->setText("CIS 17B | <a href = \"https://github.com/zzDeagle545zz/CSC-17B_Mario\"> Group Project </a>");
     classInfo->setTextFormat(Qt::RichText);
     classInfo->setTextInteractionFlags(Qt::TextBrowserInteraction);
     classInfo->setOpenExternalLinks(true);
 
     groupMember1->show();
+    groupMember1->setAlignment(Qt::AlignCenter);
     groupMember1->setText("Jacob Aragon  : <a href = \"https://github.com/Ka0t1k\"> GitHub </a> ");
     groupMember1->setTextFormat(Qt::RichText);
     groupMember1->setTextInteractionFlags(Qt::TextBrowserInteraction);

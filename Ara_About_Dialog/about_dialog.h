@@ -6,6 +6,8 @@
 #include <QHBoxLayout>
 #include <QFormLayout>
 #include <QLabel>
+#include <QPixmap>
+#include <QSpacerItem>
 namespace Ui {
 class About_Dialog;
 }
@@ -21,17 +23,13 @@ public:
 private:
     Ui::About_Dialog *ui;
     QVBoxLayout * mainVBox;
-    /*
-    QHBoxLayout * schoolInfo, * classInfo, * groupMember1,
-                * groupMember2, * groupMember3, * groupMember4,
-                * groupMember5, * groupMember6, * groupMember7,
-                * groupMember8;
-    */
+
     QLabel * schoolInfo, * classInfo, * groupMember1,
            * groupMember2, * groupMember3, * groupMember4,
            * groupMember5, * groupMember6, * groupMember7,
-           * groupMember8;
+           * groupMember8, * logoLbl, * spacerLabel;
 
+    QPixmap * logo, * spacerBar;
 
 };
 
