@@ -2,7 +2,6 @@
 #include <iostream>
 
 View::View(){
-    //setSceneRect(0,0,1280,720);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }

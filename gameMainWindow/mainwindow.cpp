@@ -124,8 +124,6 @@ void MainWindow::volumeAdjust(int volume){
 }
 
 void MainWindow::showAbout(){
-    if(!about){
-        about = new About_Dialog;
-    }
+    about = new About_Dialog;
     about->exec();
 }
