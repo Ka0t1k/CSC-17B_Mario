@@ -80,6 +80,7 @@ void MainWindow::createMenus(){
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAction);
+    menuBar()->setNativeMenuBar(false);
 }
 
 void MainWindow::setSize(){

@@ -18,16 +18,22 @@ SOURCES += main.cpp\
            mainwindow.cpp \
            settings.cpp \
            title.cpp \
-           view.cpp \
-    about_dialog.cpp
+           view.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
             title.h \
-            view.h \
-            about_dialog.h
+            view.h
 
 FORMS    +=
 
 RESOURCES += \
     mario.qrc
+
+unix|win32: LIBS += -L$$PWD/Lib/ -lAra_About_Dialog
+
+INCLUDEPATH += $$PWD/LibHeader
+DEPENDPATH += $$PWD/LibHeader
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/Lib/Ara_About_Dialog.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/Lib/libAra_About_Dialog.a
