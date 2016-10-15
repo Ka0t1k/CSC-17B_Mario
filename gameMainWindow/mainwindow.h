@@ -22,11 +22,15 @@
 #include <QSlider>
 #include <QSpacerItem>
 #include <QSpinBox>
+#include <QSplashScreen>
+#include <QStatusBar>
 #include <QStyle>
 #include "settings.h"
 #include "title.h"
+#include "view.h"
 class Settings;
 class Title;
+class View;
 
 class MainWindow : public QMainWindow{
     Q_OBJECT
@@ -48,8 +52,9 @@ private:
     void createActions();
     void createMenus();
     enum { maxState = 10 };
-    Title *title;
     Settings *setting;
+    Title *title;
+    View *view;
     QRect screenGeometry = QApplication::desktop()->screenGeometry();
     QAction *returnAction;
     QAction *emptyAction;
@@ -65,8 +70,6 @@ private:
     QMenu *viewMenu;
     QMenu *toolMenu;
     QMenu *helpMenu;
-    QGraphicsScene *scene;
-    QGraphicsView *view;
     QMediaPlayer *music;
 };
 

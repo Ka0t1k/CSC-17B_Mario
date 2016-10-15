@@ -2,15 +2,16 @@
 #define TITLE_H
 
 #include "mainwindow.h"
+class View;
 
-class Title : public QGraphicsView{
+class Title : public QGraphicsScene{
     Q_OBJECT
 public:
-    Title(QWidget *parent = 0);
-protected:
-    void showEvent(QShowEvent *);
+    Title(View *view, QWidget *parent = 0);
 private:
-    QGraphicsScene *scene;
+    QGraphicsPixmapItem *background;
+    QGraphicsPixmapItem *logo;
+    QGraphicsPixmapItem *border;
 };
 
 #endif // TITLE_H

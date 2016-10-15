@@ -4,5 +4,7 @@
         <file>music/ThemeSong.mp3</file>
         <file>images/logo.png</file>
         <file>images/icon.ico</file>
+        <file>images/border.png</file>
+        <file>music/Title.mp3</file>
     </qresource>
 </RCC>

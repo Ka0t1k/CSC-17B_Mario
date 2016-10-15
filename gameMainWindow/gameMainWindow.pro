@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
            mainwindow.cpp \
            settings.cpp \
-    title.cpp
+    title.cpp \
+    view.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
-    title.h
+    title.h \
+    view.h
 
 FORMS    +=
 

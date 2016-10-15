@@ -9,7 +9,7 @@ MainWindow::MainWindow(){
     //-----------------------------------------------TEMPORARY CODE------------------------------------------------------------------
 
     QMediaPlaylist *playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/music/ThemeSong.mp3"));
+    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
     music = new QMediaPlayer();
@@ -17,12 +17,11 @@ MainWindow::MainWindow(){
     music->play();
     connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
 
-    title = new Title;
-
     //-----------------------------------------------TEMPORARY CODE-------------------------------------------------------------------
 
-    setCentralWidget(title);
-
+    view = new View;
+    title = new Title(view);
+    setCentralWidget(view);
 }
 
 void MainWindow::closeEvent(QCloseEvent *){
@@ -84,7 +83,6 @@ void MainWindow::createMenus(){
 
 void MainWindow::setSize(){
     this->setFixedSize(1280,720);
-    //this->setFixedSize(screenGeometry.width(),screenGeometry.height());
     int x = ((screenGeometry.width() - this->width()) / 2);
     int y = ((screenGeometry.height() - this->height()) / 2);
     this->move(x, y);
@@ -109,11 +107,9 @@ void MainWindow::settings(){
 
 void MainWindow::fullScreen(bool screen){
     if(screen){
-        //this->setFixedSize(screenGeometry.width(),screenGeometry.height());
+        //setWindowFlags(Qt::FramelessWindowHint);
         this->showFullScreen();
-
     } else {
-        //this->setFixedSize(1280,720);
         this->showNormal();;
     }
 }
