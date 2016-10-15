@@ -1,13 +1,18 @@
 #include "about_dialog.h"
 #include "ui_about_dialog.h"
+#include <QDesktopWidget>
+#include <QFile>
 
 About_Dialog::About_Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::About_Dialog)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Mario: About");
+    Q_INIT_RESOURCE(AD_mario);
+    //this->setMaximumWidth(350);
+    this->setFixedSize(350,530);
 
+    this->setWindowTitle("Mario: About");
 
     this->mainVBox = new QVBoxLayout;
 
@@ -19,7 +24,7 @@ About_Dialog::About_Dialog(QWidget *parent) :
     this->spacerBar = new QPixmap(":/images/Spacer_Bar.tif");
     this->spacerLabel = new QLabel;
     spacerLabel->setPixmap(*spacerBar);
-    spacerLabel->setContentsMargins(20,8,0,3);
+    spacerLabel->setContentsMargins(55,8,0,3);
 
 
 
@@ -45,6 +50,13 @@ About_Dialog::About_Dialog(QWidget *parent) :
     mainVBox->addWidget(classInfo);
     mainVBox->addWidget(spacerLabel);
     mainVBox->addWidget(groupMember1);
+    mainVBox->addWidget(groupMember2);
+    mainVBox->addWidget(groupMember3);
+    mainVBox->addWidget(groupMember4);
+    mainVBox->addWidget(groupMember5);
+    mainVBox->addWidget(groupMember6);
+    mainVBox->addWidget(groupMember7);
+    mainVBox->addWidget(groupMember8);
 
     schoolInfo->show();
     schoolInfo->setAlignment(Qt::AlignCenter);
@@ -61,14 +73,70 @@ About_Dialog::About_Dialog(QWidget *parent) :
     classInfo->setTextInteractionFlags(Qt::TextBrowserInteraction);
     classInfo->setOpenExternalLinks(true);
 
+
     groupMember1->show();
     groupMember1->setAlignment(Qt::AlignCenter);
-    groupMember1->setText("Jacob Aragon  : <a href = \"https://github.com/Ka0t1k\"> GitHub </a> ");
+    groupMember1->setText("Zelai Wang  : <a href = \"https://github.com/ \"> GitHub </a> ");
     groupMember1->setTextFormat(Qt::RichText);
     groupMember1->setTextInteractionFlags(Qt::TextBrowserInteraction);
     groupMember1->setOpenExternalLinks(true);
+    groupMember1->setContentsMargins(37,0,0,0);
 
+    groupMember2->show();
+    groupMember2->setAlignment(Qt::AlignCenter);
+    groupMember2->setText("Mark Sutton  : <a href = \"https://github.com/ \"> GitHub </a> ");
+    groupMember2->setTextFormat(Qt::RichText);
+    groupMember2->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember2->setOpenExternalLinks(true);
+    groupMember2->setContentsMargins(30,0,0,0);
 
+    groupMember3->show();
+    groupMember3->setAlignment(Qt::AlignCenter);
+    groupMember3->setText("Christopher Schaefer  : <a href = \"https://github.com/ \"> GitHub </a> ");
+    groupMember3->setTextFormat(Qt::RichText);
+    groupMember3->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember3->setOpenExternalLinks(true);
+    groupMember3->setContentsMargins(0,0,25,0);
+
+    groupMember4->show();
+    groupMember4->setAlignment(Qt::AlignCenter);
+    groupMember4->setText("Nhat Nguyen  : <a href = \"https://github.com/ \"> GitHub </a> ");
+    groupMember4->setTextFormat(Qt::RichText);
+    groupMember4->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember4->setOpenExternalLinks(true);
+    groupMember4->setContentsMargins(24,0,0,0);
+
+    groupMember5->show();
+    groupMember5->setAlignment(Qt::AlignCenter);
+    groupMember5->setText("Zerbo Ibrahim  : <a href = \"https://github.com/mzerbo11 \"> GitHub </a> ");
+    groupMember5->setTextFormat(Qt::RichText);
+    groupMember5->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember5->setOpenExternalLinks(true);
+    groupMember5->setContentsMargins(18,0,0,0);
+
+    groupMember6->show();
+    groupMember6->setAlignment(Qt::AlignCenter);
+    groupMember6->setText("Christopher Garcia  : <a href = \"https://github.com/ \"> GitHub </a> ");
+    groupMember6->setTextFormat(Qt::RichText);
+    groupMember6->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember6->setOpenExternalLinks(true);
+    groupMember6->setContentsMargins(0,0,10,0);
+
+    groupMember7->show();
+    groupMember7->setAlignment(Qt::AlignCenter);
+    groupMember7->setText("Jonathan Baird  : <a href = \"https://github.com/ \"> GitHub </a> ");
+    groupMember7->setTextFormat(Qt::RichText);
+    groupMember7->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember7->setOpenExternalLinks(true);
+    groupMember7->setContentsMargins(14,0,0,0);
+
+    groupMember8->show();
+    groupMember8->setAlignment(Qt::AlignCenter);
+    groupMember8->setText("Jacob Aragon  : <a href = \"https://github.com/Ka0t1k\"> GitHub </a> ");
+    groupMember8->setTextFormat(Qt::RichText);
+    groupMember8->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    groupMember8->setOpenExternalLinks(true);
+    groupMember8->setContentsMargins(20,0,0,0);
 
 
 }

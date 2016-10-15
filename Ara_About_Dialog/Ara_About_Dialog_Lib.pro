@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Ara_About_Dialog
 
-TEMPLATE = app
+TEMPLATE = lib
 
 
 SOURCES += main.cpp\
@@ -20,7 +20,7 @@ HEADERS  += about_dialog.h
 
 FORMS    += about_dialog.ui
 
-CONFIG += c++11
+CONFIG += c++11 staticlib
 
 RESOURCES += \
     AD_mario.qrc

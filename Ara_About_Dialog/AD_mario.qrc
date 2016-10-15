@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/images">
         <file>Mario_Logo.tif</file>
-        <file>Mario_Logo_Bar.tif</file>
         <file>Spacer_Bar.tif</file>
+        <file>Mario_Logo_Bar.tif</file>
     </qresource>
 </RCC>

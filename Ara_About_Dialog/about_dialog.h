@@ -14,6 +14,7 @@ class About_Dialog;
 
 class About_Dialog : public QDialog
 {
+
     Q_OBJECT
 
 public:
