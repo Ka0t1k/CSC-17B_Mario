@@ -25,9 +25,11 @@
 #include <QSplashScreen>
 #include <QStatusBar>
 #include <QStyle>
+#include "about_dialog.h"
 #include "settings.h"
 #include "title.h"
 #include "view.h"
+class About_Dialog;
 class Settings;
 class Title;
 class View;
@@ -47,12 +49,13 @@ private slots:
     void fullScreen(bool);
     void alterScreen();
     void volumeAdjust(int);
-    void about();
+    void showAbout();
 private:
     void createActions();
     void createMenus();
     enum { maxState = 10 };
     Settings *setting;
+    About_Dialog *about;
     Title *title;
     View *view;
     QRect screenGeometry = QApplication::desktop()->screenGeometry();

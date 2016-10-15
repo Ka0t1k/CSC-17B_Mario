@@ -17,13 +17,15 @@ CONFIG += c++11
 SOURCES += main.cpp\
            mainwindow.cpp \
            settings.cpp \
-    title.cpp \
-    view.cpp
+           title.cpp \
+           view.cpp \
+    about_dialog.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
-    title.h \
-    view.h
+            title.h \
+            view.h \
+            about_dialog.h
 
 FORMS    +=
 

@@ -33,9 +33,6 @@ Settings::Settings(QWidget *parent) : QDialog(parent){
     connect(confirmButton, SIGNAL(clicked(bool)), this, SLOT(confirm()));
     connect(cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
 
-    bgmSlider->setValue(50);
-    sfxSlider->setValue(50);
-
     QHBoxLayout *firstLayout = new QHBoxLayout;
     firstLayout->addWidget(label);
     firstLayout->addWidget(lineEdit);

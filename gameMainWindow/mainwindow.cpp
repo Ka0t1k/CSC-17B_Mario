@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(){
 
@@ -54,7 +55,7 @@ void MainWindow::createActions(){
     connect(settingsAction, SIGNAL(triggered()), this, SLOT(settings()));
 
     aboutAction = new QAction(tr("&About"), this);
-    connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
     setting = new Settings(this);
     connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
@@ -122,6 +123,9 @@ void MainWindow::volumeAdjust(int volume){
     music->setVolume(volume);
 }
 
-void MainWindow::about(){
-    QMessageBox::about(this, tr("About Mario"), tr("<h2>Mario Game</h2" "<p>Enter information here.</p>"));
+void MainWindow::showAbout(){
+    if(!about){
+        about = new About_Dialog;
+    }
+    about->exec();
 }
