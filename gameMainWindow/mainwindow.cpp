@@ -34,9 +34,9 @@ void MainWindow::createActions(){
     returnAction->setStatusTip(tr("Return to the title screen"));
     connect(returnAction, SIGNAL(triggered()), this, SLOT(returnTitle()));
 
-    for(int i=0;i<maxState;i++){
-        saveStateAction[i] = new QAction("-Empty-");
-        loadStateAction[i] = new QAction("-Empty-");
+    for(int i=0;i<maxState;++i){
+        saveStateAction[i] = new QAction("-Empty-", this);
+        loadStateAction[i] = new QAction("-Empty-", this);
     }
 
     quitAction = new QAction(tr("&Quit"), this);
@@ -44,7 +44,7 @@ void MainWindow::createActions(){
     quitAction->setStatusTip(tr("Quit"));
     connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
 
-    fullScreenAction = new QAction(tr("Full Screen"));
+    fullScreenAction = new QAction(tr("Full Screen"), this);
     fullScreenAction->setShortcut(tr("F11"));
     fullScreenAction->setStatusTip(tr("Fullscreen View"));
     connect(fullScreenAction, SIGNAL(triggered()), this, SLOT(alterScreen()));
