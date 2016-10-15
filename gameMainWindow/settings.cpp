@@ -103,9 +103,9 @@ void Settings::alterState(){
 
 void Settings::readSettings(){
     QSettings settings("CSC-17B Mario Group", "Mario Game");
-    fullScreenView->setChecked(settings.value("fullscreen", "").toBool());
-    bgmSlider->setValue(settings.value("bgm", "").toInt());
-    sfxSlider->setValue(settings.value("sfx", "").toInt());
+    fullScreenView->setChecked(settings.value("fullscreen", false).toBool());
+    bgmSlider->setValue(settings.value("bgm", 50).toInt());
+    sfxSlider->setValue(settings.value("sfx", 50).toInt());
     confirm();
 }
 
