@@ -8,6 +8,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QGraphicsTextItem>
 #include <QGraphicsView>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -53,6 +54,7 @@ private slots:
 private:
     void createActions();
     void createMenus();
+    void createScene();
     enum { maxState = 10 };
     Settings *setting;
     About_Dialog *about;

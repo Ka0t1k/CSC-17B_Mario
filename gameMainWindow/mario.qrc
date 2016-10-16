@@ -6,5 +6,9 @@
         <file>images/icon.ico</file>
         <file>images/border.png</file>
         <file>music/Title.mp3</file>
+        <file>images/Mario_Logo_Bar.tif</file>
+        <file>images/Mario_Logo.tif</file>
+        <file>images/Spacer_Bar.tif</file>
+        <file>images/cursor.png</file>
     </qresource>
 </RCC>

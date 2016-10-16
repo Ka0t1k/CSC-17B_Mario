@@ -1,11 +1,10 @@
 #include "mainwindow.h"
-#include <iostream>
 
 MainWindow::MainWindow(){
 
     createActions();
     createMenus();
-    setting->readSettings();
+    createScene();
 
     //-----------------------------------------------TEMPORARY CODE------------------------------------------------------------------
 
@@ -20,8 +19,6 @@ MainWindow::MainWindow(){
 
     //-----------------------------------------------TEMPORARY CODE-------------------------------------------------------------------
 
-    view = new View;
-    title = new Title(view);
     setCentralWidget(view);
 }
 
@@ -58,6 +55,7 @@ void MainWindow::createActions(){
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
     setting = new Settings(this);
+    setting->readSettings();
     connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
 }
 
@@ -80,7 +78,14 @@ void MainWindow::createMenus(){
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAction);
-    menuBar()->setNativeMenuBar(false);
+
+    //menuBar()->setNativeMenuBar(false);
+}
+
+void MainWindow::createScene(){
+    view = new View;
+    title = new Title(view);
+    connect(title, SIGNAL(quitGame()), this, SLOT(close()));
 }
 
 void MainWindow::setSize(){
