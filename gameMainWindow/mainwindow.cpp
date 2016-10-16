@@ -1,24 +1,10 @@
 #include "mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(){
-
     createActions();
     createMenus();
     createScene();
-
-    //-----------------------------------------------TEMPORARY CODE------------------------------------------------------------------
-
-    QMediaPlaylist *playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
-    music = new QMediaPlayer();
-    music->setPlaylist(playlist);
-    music->play();
-    connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
-
-    //-----------------------------------------------TEMPORARY CODE-------------------------------------------------------------------
-
     setCentralWidget(view);
 }
 
@@ -54,9 +40,11 @@ void MainWindow::createActions(){
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
+    music = new QMediaPlayer();
     setting = new Settings(this);
-    setting->readSettings();
+    connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
     connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
+    setting->readSettings();
 }
 
 void MainWindow::createMenus(){
@@ -84,6 +72,8 @@ void MainWindow::createMenus(){
 
 void MainWindow::createScene(){
     view = new View;
+    connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
+
     title = new Title(view);
     connect(title, SIGNAL(quitGame()), this, SLOT(close()));
 }
@@ -123,6 +113,11 @@ void MainWindow::fullScreen(bool screen){
 
 void MainWindow::alterScreen(){
     setting->alterState();
+}
+
+void MainWindow::setMusic(){
+    music->setPlaylist(view->bgm);
+    music->play();
 }
 
 void MainWindow::volumeAdjust(int volume){

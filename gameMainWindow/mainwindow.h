@@ -49,6 +49,7 @@ private slots:
     void settings();
     void fullScreen(bool);
     void alterScreen();
+    void setMusic();
     void volumeAdjust(int);
     void showAbout();
 private:

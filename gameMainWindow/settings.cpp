@@ -119,6 +119,7 @@ void Settings::volumeChanged(){
 
 void Settings::confirm(){
     emit fullScreen(fullScreenView->isChecked());
+    emit volumeAdjust(bgmSlider->value());
     this->setState();
     this->close();
 }

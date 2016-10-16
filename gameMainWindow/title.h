@@ -22,6 +22,7 @@ private:
     QGraphicsPixmapItem *border;
     QGraphicsTextItem *start;
     QGraphicsTextItem *quit;
+    QMediaPlaylist *playlist;
 };
 
 #endif // TITLE_H
