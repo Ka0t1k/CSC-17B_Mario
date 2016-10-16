@@ -20,7 +20,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     quit->setFont(font);
     quit->setPos((width - quit->boundingRect().width()) / 2, height - 200);
 
-    cursor->setPos((width - start->boundingRect().width()) / 2 - cursor->boundingRect().width(), height - 250);
+    cursor->setPos((width - start->boundingRect().width()) / 2 - cursor->boundingRect().width(), height - 250 + cursor->boundingRect().height() / 4);
     logo->setPos((width - logo->boundingRect().width()) / 2, 50);
 
     addItem(background);
