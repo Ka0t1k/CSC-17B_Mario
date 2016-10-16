@@ -2,6 +2,10 @@
 
 Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
 
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
     background = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
     cursor = new QGraphicsPixmapItem(QPixmap(":/images/cursor.png"));
     logo = new QGraphicsPixmapItem(QPixmap(":/images/logo.png"));
@@ -28,7 +32,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     addItem(quit);
 
     this->setFocus();
-    view->setScene(this);
+    view->sceneSet(playlist, this);
 }
 
 void Title::keyPressEvent(QKeyEvent *event){
