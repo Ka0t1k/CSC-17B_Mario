@@ -1,5 +1,4 @@
 #include "view.h"
-#include <iostream>
 
 View::View(){
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

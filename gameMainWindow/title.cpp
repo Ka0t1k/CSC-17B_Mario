@@ -1,5 +1,4 @@
 #include "title.h"
-#include <iostream>
 
 Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
 
@@ -7,7 +6,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     cursor = new QGraphicsPixmapItem(QPixmap(":/images/cursor.png"));
     logo = new QGraphicsPixmapItem(QPixmap(":/images/logo.png"));
 
-    QFont font("Times", 40, QFont::PreferOutline, true);
+    QFont font("MV Boli", 30, QFont::Bold);
     start = new QGraphicsTextItem;
     start->setPlainText("S t a r t  G a m e");
     start->setDefaultTextColor(Qt::black);
@@ -21,8 +20,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     quit->setPos((width - quit->boundingRect().width()) / 2, height - 275 + start->boundingRect().height());
 
     cursor->setPos((width - start->boundingRect().width()) / 2 - cursor->boundingRect().width(), (height - 275 + start->boundingRect().height() / 4));
-    logo->setPos((width - logo->boundingRect().width()) / 2, 50);
-    std::cout<<cursor->boundingRect().height();
+    logo->setPos((width - logo->boundingRect().width()) / 2, height / 12);
     addItem(background);
     addItem(logo);
     addItem(cursor);

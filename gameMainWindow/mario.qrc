@@ -10,5 +10,6 @@
         <file>images/Mario_Logo.tif</file>
         <file>images/Spacer_Bar.tif</file>
         <file>images/cursor.png</file>
+        <file>font/SuperMario256.ttf</file>
     </qresource>
 </RCC>
