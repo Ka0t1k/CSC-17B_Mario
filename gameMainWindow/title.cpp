@@ -6,7 +6,11 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
-    background = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
+    selectSFX = new QSoundEffect();
+    selectSFX->setSource(QUrl("qrc:/music/Select.wav"));
+
+    background = new QGraphicsPixmapItem(QPixmap(":/images/background.png"));
+    foreground = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
     cursor = new QGraphicsPixmapItem(QPixmap(":/images/cursor.png"));
     logo = new QGraphicsPixmapItem(QPixmap(":/images/logo.png"));
 
@@ -26,6 +30,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     cursor->setPos((width - start->boundingRect().width()) / 2 - cursor->boundingRect().width(), (height - 275 + start->boundingRect().height() / 4));
     logo->setPos((width - logo->boundingRect().width()) / 2, height / 12);
     addItem(background);
+    addItem(foreground);
     addItem(logo);
     addItem(cursor);
     addItem(start);
@@ -44,6 +49,7 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection--;
             cursor->moveBy(0,-start->boundingRect().height());
         }
+        selectSFX->play();
     }
     if(event->key() == Qt::Key_Down){
         if(selection == 1){
@@ -53,6 +59,7 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection++;
             cursor->moveBy(0,start->boundingRect().height());
         }
+        selectSFX->play();
     }
     if(event->key() == Qt::Key_Z){
         if(selection == 0){
@@ -61,5 +68,8 @@ void Title::keyPressEvent(QKeyEvent *event){
         if(selection == 1){
             emit quitGame();
         }
+    }
+    if(event->key() == Qt::Key_Right){
+        background->moveBy(1,0);
     }
 }

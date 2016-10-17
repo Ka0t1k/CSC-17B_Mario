@@ -21,6 +21,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSlider>
+#include <QSoundEffect>
 #include <QSpacerItem>
 #include <QSpinBox>
 #include <QSplashScreen>

@@ -17,12 +17,14 @@ private:
     const int width = 1280;
     const int height = 720;
     QGraphicsPixmapItem *background;
+    QGraphicsPixmapItem *foreground;
     QGraphicsPixmapItem *cursor;
     QGraphicsPixmapItem *logo;
     QGraphicsPixmapItem *border;
     QGraphicsTextItem *start;
     QGraphicsTextItem *quit;
     QMediaPlaylist *playlist;
+    QSoundEffect *selectSFX;
 };
 
 #endif // TITLE_H
