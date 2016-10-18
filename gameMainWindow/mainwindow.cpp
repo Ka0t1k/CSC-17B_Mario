@@ -99,7 +99,7 @@ void MainWindow::load(){
 
 void MainWindow::settings(){
     setting->setState();
-    setting->exec();
+    setting->show();
 }
 
 void MainWindow::fullScreen(bool screen){

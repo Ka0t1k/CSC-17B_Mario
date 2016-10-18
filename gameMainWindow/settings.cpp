@@ -67,6 +67,7 @@ Settings::Settings(QWidget *parent) : QDialog(parent){
     mainLayout->addLayout(fifthLayout);
 
     setLayout(mainLayout);
+    setWindowModality(Qt::WindowModal);
     setWindowTitle("Settings");
 }
 
@@ -95,6 +96,7 @@ void Settings::alterState(){
     } else {
         fullScreenView->setChecked(true);
     }
+    this->show();
     this->confirm();
 }
 
