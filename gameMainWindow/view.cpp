@@ -2,6 +2,7 @@
 
 View::View(){
     bgm = new QMediaPlaylist;
+    this->setFixedSize(1280,720);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
