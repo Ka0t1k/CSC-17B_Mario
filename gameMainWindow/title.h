@@ -4,6 +4,11 @@
 #include "mainwindow.h"
 class View;
 
+class AnimatedGraphicsItem : public QObject, public QGraphicsPixmapItem{
+    Q_OBJECT
+    Q_PROPERTY(QPointF pos READ pos WRITE setPos)
+};
+
 class Title : public QGraphicsScene{
     Q_OBJECT
 public:
@@ -16,7 +21,7 @@ private:
     int selection = 0;
     const int width = 1280;
     const int height = 720;
-    QGraphicsPixmapItem *background;
+    AnimatedGraphicsItem *background;
     QGraphicsPixmapItem *foreground;
     QGraphicsPixmapItem *cursor;
     QGraphicsPixmapItem *logo;
@@ -24,6 +29,7 @@ private:
     QGraphicsTextItem *start;
     QGraphicsTextItem *quit;
     QMediaPlaylist *playlist;
+    QPropertyAnimation *animation;
     QSoundEffect *selectSFX;
 };
 

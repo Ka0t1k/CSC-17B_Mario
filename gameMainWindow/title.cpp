@@ -9,10 +9,18 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     selectSFX = new QSoundEffect();
     selectSFX->setSource(QUrl("qrc:/music/Select.wav"));
 
-    background = new QGraphicsPixmapItem(QPixmap(":/images/background.png"));
+    background = new AnimatedGraphicsItem;
+    background->setPixmap(QPixmap(":/images/background.png"));
     foreground = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
     cursor = new QGraphicsPixmapItem(QPixmap(":/images/cursor.png"));
     logo = new QGraphicsPixmapItem(QPixmap(":/images/logo.png"));
+
+    animation = new QPropertyAnimation(background, "pos");
+    animation->setLoopCount(-1);
+    animation->setDuration(150000);
+    animation->setStartValue(QPoint(-width,0));
+    animation->setEndValue(QPoint(0,0));
+    animation->start();
 
     QFont font("MV Boli", 30, QFont::Bold);
     start = new QGraphicsTextItem;
@@ -68,8 +76,5 @@ void Title::keyPressEvent(QKeyEvent *event){
         if(selection == 1){
             emit quitGame();
         }
-    }
-    if(event->key() == Qt::Key_Right){
-        background->moveBy(1,0);
     }
 }

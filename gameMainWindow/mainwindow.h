@@ -18,6 +18,7 @@
 #include <QMediaPlaylist>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPropertyAnimation>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSlider>
