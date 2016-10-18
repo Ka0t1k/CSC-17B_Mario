@@ -4,8 +4,8 @@
 
 Player::Player(QGraphicsItem *parent)
     : QGraphicsItem(parent)
-    , m_direction()
-{  
+    , m_direction(),mCurrentFrame()
+{
 
     setFlag(ItemClipsToShape);
     mPixmap = QPixmap(":images/mario_walk_2.png");

@@ -168,7 +168,7 @@ void MyScene::movePlayer()
    // m_grass->setPos(-(m_grass->boundingRect().width() - width()) * ff, m_grass->y());
     m_Scene->setPos(-(m_Scene->boundingRect().width() - width()) * ff, m_Scene->y());
     m_coins->setPos(-(m_coins->boundingRect().width() - width()) * ff, m_coins->y());
-    m_tube->setPos(100+(m_tube->boundingRect().width() - width()) * ff*3, m_tube->y());
+    m_tube->setPos(300+(m_tube->boundingRect().width() - width()) * ff*3, m_tube->y());
 
     checkColliding();
 }
@@ -208,7 +208,7 @@ void MyScene::initPlayField()
     addItem(m_player);
 
     m_tube = new Tube();
-    m_tube->setPos(100, m_groundLevel - m_tube->boundingRect().height() );
+    m_tube->setPos(300, m_groundLevel - m_tube->boundingRect().height() );
     addItem(m_tube);
 
     // Add some coins
