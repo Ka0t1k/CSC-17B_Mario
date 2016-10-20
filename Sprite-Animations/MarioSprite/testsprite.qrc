@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>mario_walk.png</file>
+    </qresource>
+</RCC>
