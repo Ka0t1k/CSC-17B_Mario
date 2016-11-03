@@ -73,8 +73,9 @@ void Title::keyPressEvent(QKeyEvent *event){
     }
     if(event->key() == Qt::Key_Z){
         if(selection == 0){
-            scene = new placeHolderScene(viewer);
-            viewer->sceneSet(scene->getMusic(), scene);
+            scene = new MyScene(viewer);
+            delete this;
+
         }
         if(selection == 1){
             qApp->exit();

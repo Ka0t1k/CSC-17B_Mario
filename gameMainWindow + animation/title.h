@@ -2,9 +2,9 @@
 #define TITLE_H
 
 #include "mainwindow.h"
-#include "placeholderscene.h"
+#include "myscene.h"
 class View;
-class placeHolderScene;
+class MyScene;
 
 class AnimatedGraphicsItem : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -35,7 +35,7 @@ private:
     QPropertyAnimation *animation;
     QSoundEffect *selectSFX;
 
-    placeHolderScene *scene;
+    MyScene *scene;
 };
 
 #endif // TITLE_H

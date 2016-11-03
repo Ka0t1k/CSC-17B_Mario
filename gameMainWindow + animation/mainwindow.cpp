@@ -102,7 +102,6 @@ void MainWindow::settings(){
 
 void MainWindow::fullScreen(bool screen){
     if(screen){
-        //setWindowFlags(Qt::FramelessWindowHint);
         this->showFullScreen();
     } else {
         this->showNormal();;

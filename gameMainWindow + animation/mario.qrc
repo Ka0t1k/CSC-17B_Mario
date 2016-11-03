@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/title.png</file>
+        <file>music/ThemeSong.mp3</file>
+        <file>images/logo.png</file>
+        <file>images/icon.ico</file>
+        <file>music/Title.mp3</file>
+        <file>images/Mario_Logo_Bar.tif</file>
+        <file>images/Mario_Logo.tif</file>
+        <file>images/Spacer_Bar.tif</file>
+        <file>images/cursor.png</file>
+        <file>font/SuperMario256.ttf</file>
+        <file>music/Select.wav</file>
+        <file>images/background.png</file>
+        <file>images/grass.png</file>
+        <file>images/ground.png</file>
+        <file>images/logo2.png</file>
+        <file>images/mario_stop.png</file>
+        <file>images/mario_walk_2.png</file>
+        <file>images/mario_walk.png</file>
+        <file>images/Mario.png</file>
+        <file>images/mariosplash.png</file>
+        <file>images/Scene.png</file>
+        <file>images/sky.png</file>
+        <file>images/volume.png</file>
+        <file>images/Warp.png</file>
+    </qresource>
+</RCC>

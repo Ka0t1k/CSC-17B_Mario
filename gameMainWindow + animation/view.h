@@ -11,7 +11,6 @@ public:
     View();
     void sceneSet(QMediaPlaylist *, QGraphicsScene *);
     QMediaPlaylist *bgm;
-
 };
 
 #endif // VIEW_H

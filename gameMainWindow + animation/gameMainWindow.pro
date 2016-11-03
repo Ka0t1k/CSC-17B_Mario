@@ -20,14 +20,24 @@ SOURCES += main.cpp\
            title.cpp \
            view.cpp \
     about_dialog.cpp \
-    placeholderscene.cpp
+    placeholderscene.cpp \
+    backgrounditem.cpp \
+    coin.cpp \
+    myscene.cpp \
+    player.cpp \
+    tube.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
             title.h \
             view.h \
     about_dialog.h \
-    placeholderscene.h
+    placeholderscene.h \
+    backgrounditem.h \
+    coin.h \
+    myscene.h \
+    player.h \
+    tube.h
 
 FORMS    +=
 
