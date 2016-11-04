@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/coin.png</file>
+        <file>images/ground.png</file>
+        <file>images/mario_walk_2.png</file>
+        <file>images/mariosplash.png</file>
+        <file>images/Scene.png</file>
+        <file>images/sky.png</file>
+        <file>images/Warp.png</file>
+        <file>audio/jump.mp3</file>
+        <file>audio/ThemeSong.mp3</file>
+        <file>images/flag.png</file>
+        <file>images/brick_cluster2.png</file>
+        <file>images/qbox.png</file>
+        <file>images/single_block.png</file>
+    </qresource>
+</RCC>
