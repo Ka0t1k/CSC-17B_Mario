@@ -6,10 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Ara_Sound_Manager w;
-
-    //w.playSoundEffect("coin");
-
-    w.playSoundEffect("mario_jump");
     w.show();
+    w.playSoundEffect("theme");
     return a.exec();
 }

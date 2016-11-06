@@ -8,7 +8,13 @@ Ara_Sound_Manager::Ara_Sound_Manager(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Ara_Sound_Manager)
 {
+    Q_INIT_RESOURCE(ara_sound_rsc);
     ui->setupUi(this);
+
+    this->select = new QSoundEffect;
+    select->setSource(QUrl("qrc:/sound/Select.wav"));
+    select->setLoopCount(0);
+    select->setVolume(.25f);
 
 
     this->coin = new QSoundEffect;
@@ -25,13 +31,12 @@ Ara_Sound_Manager::Ara_Sound_Manager(QWidget *parent) :
 
     this->mario_death = new QSoundEffect;
     mario_death->setSource(QUrl("qrc:/sound/smw_lost_a_life.wav"));
-    mario_death->setLoopCount(10);
+    mario_death->setLoopCount(0);
     mario_death->setVolume(.20f);
     //mario_death->play();
 
-    this->levelTrack = new QMediaContent(QUrl::fromLocalFile(":/sound/smw_course_clear.wav"));
+
     this->soundPlayer = new QMediaPlayer;
-    soundPlayer->setMedia(QUrl("qrc:/sound/smw_course_clear.wav"));
     soundPlayer->setVolume(80);
     //soundPlayer->play();
 
@@ -54,6 +59,19 @@ void Ara_Sound_Manager::playSoundEffect(QString which){
     else if(which == "coin"){
         this->coin->play();
     }
+    else if(which == "select"){
+        this->select->play();
+    }
+    else if(which == "theme"){
+        soundPlayer->setMedia(QUrl("qrc:/sound/ThemeSong.mp3"));
+        soundPlayer->play();
+    }
+    else if(which == "title"){
 
+    }
 
 }
+
+
+
+

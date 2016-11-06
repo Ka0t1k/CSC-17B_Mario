@@ -20,17 +20,28 @@ public:
     explicit Ara_Sound_Manager(QWidget *parent = 0);
     ~Ara_Sound_Manager();
 
+    //note the templated class. Necessary because i take in any class object
+    //and connect its playSound signal to the sound managers playSoundEffect slot
+    //see implementation at the bottom
+    template <class T>
+    void connectSound(T *);
+
 private:
     Ui::Ara_Sound_Manager *ui;
 
-    QSoundEffect * mario_jump, * mario_death, * mario_mushroom, * coin;
+    QSoundEffect * mario_jump, * mario_death, * mario_mushroom, * coin, * select;
 
-
-    QMediaContent * levelTrack;
     QMediaPlayer * soundPlayer;
 
 public slots:
     void playSoundEffect(QString);
+
+
 };
+
+template <class T>
+void Ara_Sound_Manager::connectSound(T * theClass){
+    this->connect(theClass, SIGNAL(playSound(QString)), this, SLOT(playSoundEffect(QString)));
+}
 
 #endif // ARA_SOUND_MANAGER_H
