@@ -32,6 +32,8 @@
 #include "settings.h"
 #include "title.h"
 #include "view.h"
+#include "ara_sound_manager.h"
+
 class About_Dialog;
 class Settings;
 class Title;
@@ -42,6 +44,7 @@ class MainWindow : public QMainWindow{
 public:
     MainWindow();
     void setSize();
+
 protected:
     void closeEvent(QCloseEvent *event);
 private slots:
@@ -51,8 +54,8 @@ private slots:
     void settings();
     void fullScreen(bool);
     void alterScreen();
-    void setMusic();
-    void volumeAdjust(int);
+    //void setMusic();
+    //void volumeAdjust(int);
     void showAbout();
 private:
     void createActions();
@@ -78,7 +81,14 @@ private:
     QMenu *viewMenu;
     QMenu *toolMenu;
     QMenu *helpMenu;
-    QMediaPlayer *music;
+
+    /*Ara
+     * QMediaPlayer *music;
+    */
+    Ara_Sound_Manager * mySoundManager;
+
+signals:
+    void playSound(QString);
 };
 
 #endif // MAINWINDOW_H

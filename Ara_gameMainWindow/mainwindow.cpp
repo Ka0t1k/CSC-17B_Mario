@@ -2,6 +2,8 @@
 #include <iostream>
 
 MainWindow::MainWindow(){
+    this->mySoundManager = new Ara_Sound_Manager;
+    mySoundManager->connectSound(this);
     createActions();
     createMenus();
     createScene();
@@ -40,10 +42,10 @@ void MainWindow::createActions(){
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
-    music = new QMediaPlayer();
+    //music = new QMediaPlayer();
     setting = new Settings(this);
-    connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
-    connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
+    //connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
+    //connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
     setting->readSettings();
 }
 
@@ -74,6 +76,8 @@ void MainWindow::createScene(){
     view = new View;
     connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
     title = new Title(view);
+    //i connect the title to the sound manager
+    this->mySoundManager->connectSound(title);
 }
 
 void MainWindow::setSize(){
@@ -113,7 +117,7 @@ void MainWindow::alterScreen(){
     setting->alterState();
 }
 
-void MainWindow::setMusic(){
+/*void MainWindow::setMusic(){
     music->setPlaylist(view->bgm);
     music->play();
 }
@@ -121,8 +125,10 @@ void MainWindow::setMusic(){
 void MainWindow::volumeAdjust(int volume){
     music->setVolume(volume);
 }
+*/
 
 void MainWindow::showAbout(){
     about = new About_Dialog;
     about->exec();
 }
+

@@ -12,6 +12,9 @@ int main(int argc, char *argv[])
     mainWin.setSize();
     mainWin.show();
 
+    //playing the theme here just for testing
+    mainWin.playSound("theme");
+
     //splash->finish(&mainWin);
     //delete splash;
 
