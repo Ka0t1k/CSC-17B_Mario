@@ -2,6 +2,14 @@
 #include <iostream>
 
 MainWindow::MainWindow(){
+    //ARA I initialize the sound manager and pass the mainwindow object to it
+    //the connectSound function connects the playSound signal to the playSound
+    //slot of the manager. I MIGHT NEED TO ADD OVERLOADED FUNCTIONS FOR PLAY OPTIONS
+    this->soundManager = new Ara_Sound_Manager;
+    soundManager->connectSound(this);
+    //playSoundEffect is a public slot so it can be called.
+    soundManager->playSoundEffect("theme");
+
     createActions();
     createMenus();
     createScene();
@@ -40,10 +48,10 @@ void MainWindow::createActions(){
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
-    music = new QMediaPlayer();
+    //ARA music = new QMediaPlayer();
     setting = new Settings(this);
-    connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
-    connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
+    //ARA connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
+    //ARA connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
     setting->readSettings();
 }
 
@@ -72,8 +80,9 @@ void MainWindow::createMenus(){
 
 void MainWindow::createScene(){
     view = new View;
-    connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
+    //ARA connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
     title = new Title(view);
+    this->soundManager->connectSound(title);
 }
 
 void MainWindow::setSize(){
@@ -112,7 +121,8 @@ void MainWindow::fullScreen(bool screen){
 void MainWindow::alterScreen(){
     setting->alterState();
 }
-
+//ARA Need to change these to work with the sound manager
+/*
 void MainWindow::setMusic(){
     music->setPlaylist(view->bgm);
     music->play();
@@ -121,7 +131,7 @@ void MainWindow::setMusic(){
 void MainWindow::volumeAdjust(int volume){
     music->setVolume(volume);
 }
-
+*/
 void MainWindow::showAbout(){
     about = new About_Dialog;
     about->exec();

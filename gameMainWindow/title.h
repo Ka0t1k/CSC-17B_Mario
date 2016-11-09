@@ -17,6 +17,7 @@ public:
     Title(View *view, QWidget *parent = 0);
 signals:
     void quitGame();
+    void playSound(QString);
 protected:
     void keyPressEvent(QKeyEvent *event);
 private:
@@ -33,7 +34,7 @@ private:
     QGraphicsTextItem *quit;
     QMediaPlaylist *playlist;
     QPropertyAnimation *animation;
-    QSoundEffect *selectSFX;
+    //ARA QSoundEffect *selectSFX;
 
     placeHolderScene *scene;
 };
