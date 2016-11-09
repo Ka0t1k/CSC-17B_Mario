@@ -19,17 +19,39 @@ SOURCES += main.cpp\
            settings.cpp \
            title.cpp \
            view.cpp \
-    about_dialog.cpp \
     placeholderscene.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
             title.h \
             view.h \
-    about_dialog.h \
     placeholderscene.h
 
 FORMS    +=
 
 RESOURCES += \
     mario.qrc
+
+#Libraries Headers Path
+INCLUDEPATH += $$PWD/'~LibHeaders'
+DEPENDPATH += $$PWD/'~LibHeaders'
+
+#------------------------------------------------------------#
+#-----------------------Mac Libraries------------------------#
+#------------------------------------------------------------#
+macx: LIBS += -L$$PWD/'~MacLib/' -lAra_About_Dialog
+macx: PRE_TARGETDEPS += $$PWD/'~MacLib/libAra_About_Dialog.a'
+
+macx: LIBS += -L$$PWD/'~MacLib/' -lAra_Sound_Manager
+macx: PRE_TARGETDEPS += $$PWD/'~MacLib/libAra_Sound_Manager.a'
+
+#------------------------------------------------------------#
+#-----------------------Win Libraries------------------------#
+#------------------------------------------------------------#
+win32: LIBS += -L$$PWD/'~WinLib/' -lAra_About_Dialog
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'~WinLib/Ara_About_Dialog.lib'
+else:win32-g++: PRE_TARGETDEPS += $$PWD/'~WinLib/libAra_About_Dialog.a'
+
+win32: LIBS += -L$$PWD/'~WinLib/' -lAra_Sound_Manager
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'~WinLib/Ara_Sound_Manager.lib'
+else:win32-g++: PRE_TARGETDEPS += $$PWD/'~WinLib/libAra_Sound_Manager.a'

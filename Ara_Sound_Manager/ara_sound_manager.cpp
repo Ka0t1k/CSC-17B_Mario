@@ -72,6 +72,14 @@ void Ara_Sound_Manager::playSoundEffect(QString which){
 
 }
 
+void Ara_Sound_Manager::setVolume(qreal volume){
+this->setSoundVolume(mario_jump,volume);
+this->setSoundVolume(mario_death,volume);
+this->setSoundVolume(mario_mushroom,volume);
+this->setSoundVolume(coin,volume);
+this->setSoundVolume(select,volume);
+this->setSoundVolume(soundPlayer,volume);
+}
 
 
 
