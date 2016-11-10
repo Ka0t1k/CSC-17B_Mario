@@ -35,14 +35,16 @@ private:
     QSoundEffect * mario_jump, * mario_death, * mario_mushroom, * coin, * select;
 
     QMediaPlayer * soundPlayer;
-
+/*
     template <class T>
     void setSoundVolume(T *, qreal);
+*/
 
 public slots:
     void playSoundEffect(QString);
 
-
+    void setBGMVolume(int);
+    void setSFXVolume(qreal);
 };
 
 template <class T>
@@ -50,9 +52,10 @@ void Ara_Sound_Manager::connectSound(T * theClass){
     this->connect(theClass, SIGNAL(playSound(QString)), this, SLOT(playSoundEffect(QString)));
 }
 
+/*
 template <class T>
 void Ara_Sound_Manager::setSoundVolume(T * theSound, qreal volume ){
     theSound->setVolume(volume);
 }
-
+*/
 #endif // ARA_SOUND_MANAGER_H
