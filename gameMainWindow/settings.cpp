@@ -1,4 +1,5 @@
 #include "settings.h"
+#include <iostream>
 
 Settings::Settings(QWidget *parent) : QDialog(parent){
     label = new QLabel(tr("Player Name: "));
