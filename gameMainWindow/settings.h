@@ -14,9 +14,11 @@ public:
     void writeSettings();
 signals:
     void fullScreen(bool);
-    void volumeAdjust(int);
+    void bgmAdjust(int);
+    void sfxAdjust(int);
 private slots:
-    void volumeChanged();
+    void bgmChanged();
+    void sfxChanged();
     void confirm();
 private:
     bool full;

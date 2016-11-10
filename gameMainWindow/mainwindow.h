@@ -56,9 +56,8 @@ private slots:
     void settings();
     void fullScreen(bool);
     void alterScreen();
-    //ARA need to change these for the sound manager
-    //ARA void setMusic();
-    //ARA void volumeAdjust(int);
+    void bgmAdjust(int);
+    void sfxAdjust(int);
     void showAbout();
 private:
     void createActions();
@@ -88,7 +87,6 @@ private:
     QMenu *viewMenu;
     QMenu *toolMenu;
     QMenu *helpMenu;
-    //ARA QMediaPlayer *music;
 
     Ara_Sound_Manager *soundManager;
 

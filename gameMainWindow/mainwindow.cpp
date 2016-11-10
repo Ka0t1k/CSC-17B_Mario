@@ -48,10 +48,10 @@ void MainWindow::createActions(){
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
-    //ARA music = new QMediaPlayer();
     setting = new Settings(this);
-    //ARA connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
-    //ARA connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
+    connect(setting, SIGNAL(bgmAdjust(int)), this, SLOT(bgmAdjust(int)));
+    connect(setting, SIGNAL(sfxAdjust(int)), this, SLOT(sfxAdjust(int)));
+    connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
     setting->readSettings();
 }
 
@@ -80,7 +80,6 @@ void MainWindow::createMenus(){
 
 void MainWindow::createScene(){
     view = new View;
-    //ARA connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
     title = new Title(view);
     this->soundManager->connectSound(title);
 }
@@ -111,7 +110,6 @@ void MainWindow::settings(){
 
 void MainWindow::fullScreen(bool screen){
     if(screen){
-        //setWindowFlags(Qt::FramelessWindowHint);
         this->showFullScreen();
     } else {
         this->showNormal();;
@@ -121,17 +119,16 @@ void MainWindow::fullScreen(bool screen){
 void MainWindow::alterScreen(){
     setting->alterState();
 }
-//ARA Need to change these to work with the sound manager
-/*
-void MainWindow::setMusic(){
-    music->setPlaylist(view->bgm);
-    music->play();
+
+void MainWindow::bgmAdjust(int volume){
+    soundManager->setBGMVolume(volume);
 }
 
-void MainWindow::volumeAdjust(int volume){
-    music->setVolume(volume);
+void MainWindow::sfxAdjust(int volume){
+    soundManager->setSFXVolume(volume);
 }
-*/
+
+
 void MainWindow::showAbout(){
     about = new About_Dialog;
     about->exec();

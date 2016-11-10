@@ -27,9 +27,10 @@ Settings::Settings(QWidget *parent) : QDialog(parent){
 
     connect(bgmSpinBox, SIGNAL(valueChanged(int)), bgmSlider, SLOT(setValue(int)));
     connect(bgmSlider, SIGNAL(valueChanged(int)), bgmSpinBox, SLOT(setValue(int)));
-    connect(bgmSlider, SIGNAL(valueChanged(int)), this, SLOT(volumeChanged()));
+    connect(bgmSlider, SIGNAL(valueChanged(int)), this, SLOT(bgmChanged()));
     connect(sfxSpinBox, SIGNAL(valueChanged(int)), sfxSlider, SLOT(setValue(int)));
     connect(sfxSlider, SIGNAL(valueChanged(int)), sfxSpinBox, SLOT(setValue(int)));
+    connect(sfxSlider, SIGNAL(valueChanged(int)), this, SLOT(sfxChanged()));
     connect(confirmButton, SIGNAL(clicked(bool)), this, SLOT(confirm()));
     connect(cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
 
@@ -115,13 +116,18 @@ void Settings::writeSettings(){
     settings.setValue("sfx", sfxSlider->value());
 }
 
-void Settings::volumeChanged(){
-    emit volumeAdjust(bgmSlider->value());
+void Settings::bgmChanged(){
+    emit bgmAdjust(bgmSlider->value());
+}
+
+void Settings::sfxChanged(){
+    emit sfxAdjust(sfxSlider->value());
 }
 
 void Settings::confirm(){
     emit fullScreen(fullScreenView->isChecked());
-    emit volumeAdjust(bgmSlider->value());
+    emit bgmAdjust(bgmSlider->value());
+    emit sfxAdjust(sfxSlider->value());
     this->setState();
     this->close();
 }

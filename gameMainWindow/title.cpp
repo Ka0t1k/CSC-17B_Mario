@@ -4,11 +4,11 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
 
     viewer = view;
 
+    //ARA
+    /*
     playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
-    //ARA
-    /*
     selectSFX = new QSoundEffect();
     selectSFX->setSource(QUrl("qrc:/music/Select.wav"));
     */
@@ -60,7 +60,6 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection--;
             cursor->moveBy(0,-start->boundingRect().height());
         }
-        //ARA selectSFX->play();
         emit playSound("select");
     }
     if(event->key() == Qt::Key_Down){
@@ -71,7 +70,6 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection++;
             cursor->moveBy(0,start->boundingRect().height());
         }
-        //ARA selectSFX->play();
         emit playSound("select");
     }
     if(event->key() == Qt::Key_Z){
