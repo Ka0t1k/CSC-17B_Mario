@@ -57,7 +57,7 @@ private slots:
     void fullScreen(bool);
     void alterScreen();
     void bgmAdjust(int);
-    void sfxAdjust(qreal);
+    void sfxAdjust(int);
     void showAbout();
 private:
     void createActions();

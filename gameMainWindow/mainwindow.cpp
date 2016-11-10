@@ -50,7 +50,7 @@ void MainWindow::createActions(){
 
     setting = new Settings(this);
     connect(setting, SIGNAL(bgmAdjust(int)), this, SLOT(bgmAdjust(int)));
-    connect(setting, SIGNAL(sfxAdjust(qreal)), this, SLOT(sfxAdjust(qreal)));
+    connect(setting, SIGNAL(sfxAdjust(int)), this, SLOT(sfxAdjust(int)));
     connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
     setting->readSettings();
 }
@@ -124,7 +124,7 @@ void MainWindow::bgmAdjust(int volume){
     soundManager->setBGMVolume(volume);
 }
 
-void MainWindow::sfxAdjust(qreal volume){
+void MainWindow::sfxAdjust(int volume){
     soundManager->setSFXVolume(volume);
 }
 

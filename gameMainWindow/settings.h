@@ -15,7 +15,7 @@ public:
 signals:
     void fullScreen(bool);
     void bgmAdjust(int);
-    void sfxAdjust(qreal);
+    void sfxAdjust(int);
 private slots:
     void bgmChanged();
     void sfxChanged();

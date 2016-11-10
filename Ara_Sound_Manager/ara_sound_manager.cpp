@@ -35,6 +35,9 @@ Ara_Sound_Manager::Ara_Sound_Manager(QWidget *parent) :
     mario_death->setVolume(.20f);
     //mario_death->play();
 
+    this->mario_mushroom = new QSoundEffect;
+
+
 
     this->soundPlayer = new QMediaPlayer;
     soundPlayer->setVolume(80);
@@ -77,12 +80,15 @@ void Ara_Sound_Manager::setBGMVolume(int volume){
     this->soundPlayer->setVolume(volume);
 }
 void Ara_Sound_Manager::setSFXVolume(int volume){
-    qreal theVolume = volume / 100;
-    this->mario_jump->setVolume(theVolume);
-    this->mario_death->setVolume(theVolume);
-    this->mario_mushroom->setVolume(theVolume);
-    this->coin->setVolume(theVolume);
-    this->select->setVolume(theVolume);
+    qreal qVolume = volume;
+    qVolume /=100;
+
+    this->mario_jump->setVolume(qVolume);
+    this->mario_death->setVolume(qVolume);
+    this->mario_mushroom->setVolume(qVolume);
+    this->coin->setVolume(qVolume);
+    this->select->setVolume(qVolume);
+
 }
 
 
