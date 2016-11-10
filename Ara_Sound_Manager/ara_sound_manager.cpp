@@ -76,12 +76,13 @@ void Ara_Sound_Manager::playSoundEffect(QString which){
 void Ara_Sound_Manager::setBGMVolume(int volume){
     this->soundPlayer->setVolume(volume);
 }
-void Ara_Sound_Manager::setSFXVolume(qreal volume){
-    this->mario_jump->setVolume(volume);
-    this->mario_death->setVolume(volume);
-    this->mario_mushroom->setVolume(volume);
-    this->coin->setVolume(volume);
-    this->select->setVolume(volume);
+void Ara_Sound_Manager::setSFXVolume(int volume){
+    qreal theVolume = volume / 100;
+    this->mario_jump->setVolume(theVolume);
+    this->mario_death->setVolume(theVolume);
+    this->mario_mushroom->setVolume(theVolume);
+    this->coin->setVolume(theVolume);
+    this->select->setVolume(theVolume);
 }
 
 

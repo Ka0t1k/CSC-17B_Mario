@@ -38,7 +38,7 @@ public slots:
     void playSoundEffect(QString);
 
     void setBGMVolume(int);
-    void setSFXVolume(qreal);
+    void setSFXVolume(int);
 };
 
 template <class T>
