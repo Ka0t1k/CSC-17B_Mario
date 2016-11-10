@@ -124,7 +124,7 @@ void MainWindow::bgmAdjust(int volume){
     soundManager->setBGMVolume(volume);
 }
 
-void MainWindow::sfxAdjust(int volume){
+void MainWindow::sfxAdjust(qreal volume){
     soundManager->setSFXVolume(volume);
 }
 

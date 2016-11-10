@@ -20,8 +20,7 @@ public:
     explicit Ara_Sound_Manager(QWidget *parent = 0);
     ~Ara_Sound_Manager();
 
-    void setVolume(qreal);
-
+    //void setVolume(qreal);
 
     //note the templated class. Necessary because i take in any class object
     //and connect its playSound signal to the sound managers playSoundEffect slot
