@@ -2,31 +2,37 @@
 #include <QKeyEvent>
 #include <QPropertyAnimation>
 #include <QGraphicsView>
-#include <QPen>
 #include <QGraphicsPixmapItem>
 #include "player.h"
 #include "coin.h"
 #include "backgrounditem.h"
-#include "tube.h"
+#include "castle.h"
+#include "goomba.h"
+#include "questbox.h"
+#include "glowbrick.h"
+#include "turtle.h"
+#include "piranha.h"
 
-MyScene::MyScene(View *view, QObject *parent) :
+MyScene::MyScene(QObject *parent) :
     QGraphicsScene(parent)
-  , m_velocity(4)
+  , m_velocity(7)
   , m_skippedMoving(0)
   , m_groundLevel(0)
   , m_minX(0)//minimum x coordinate of world
   , m_maxX(0)//maximum x coordinate of world
   , m_jumpAnimation(new QPropertyAnimation(this))
-  , m_jumpHeight(180)
-  , m_fieldWidth(3500)//width of the virtual world
-  , m_player(0)
+  , m_jumpHeight(200)
+  , m_fieldWidth(8000)//width of the virtual world
+  , m_player()
   , m_sky(0)
   , m_Scene(0)
-  , m_grass(0)
   , m_coins(0)
-  , m_tube(0)
-
-
+  , h_castle()
+  , m_goomba()
+  , m_questbox()
+  , m_glowbrick()
+  , m_turtle()
+  ,m_piranha()
 {
     initPlayField();
 
@@ -37,7 +43,7 @@ MyScene::MyScene(View *view, QObject *parent) :
     connect(&m_timer, &QTimer::timeout, this, &MyScene::movePlayer);
 
     jumpSound = new QMediaPlayer();
-    jumpSound->setMedia(QUrl("qrc:/music/jump.mp3"));
+    jumpSound->setMedia(QUrl("qrc:/audio/jump.mp3"));
 
     m_jumpAnimation->setTargetObject(this);
     m_jumpAnimation->setPropertyName("jumpFactor");
@@ -48,17 +54,7 @@ MyScene::MyScene(View *view, QObject *parent) :
     m_jumpAnimation->setEasingCurve(QEasingCurve::OutInQuad);
     connect(this, &MyScene::jumpFactorChanged, this, &MyScene::jumpPlayer);
 
-    playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
-    view->sceneSet(playlist, this);
 }
-
-QMediaPlaylist *MyScene::getMusic(){
-    return playlist;
-}
-
 
 void MyScene::keyPressEvent(QKeyEvent *event)
 {
@@ -68,7 +64,7 @@ void MyScene::keyPressEvent(QKeyEvent *event)
 
     switch (event->key()) {
     case Qt::Key_Right:
-        m_player->addDirection(1);             
+        m_player->addDirection(1);
         checkTimer();
         break;
     case Qt::Key_Left:
@@ -118,8 +114,7 @@ void MyScene::keyReleaseEvent(QKeyEvent *event)
 
 void MyScene::movePlayer()
 {
-        m_player->nextFrame();
-
+    m_player->nextFrame();
 
     int direction = m_player->direction();     //Cache the player's current direction in a local variable to avoid multiple calls of direction()
     if (0 == direction)                       //check whether the player is moving at all. If they aren't, we exit the function
@@ -139,8 +134,8 @@ void MyScene::movePlayer()
         return;
     m_realPos = newPos;
 
-    const int rightBorder = 350 - m_player->boundingRect().width(); //How far the character can move before view moves
-    const int leftBorder = 150;
+    const int rightBorder = 970 - m_player->boundingRect().width(); //How far the character can move before view moves
+    const int leftBorder = 250;
 
     if (direction > 0) {
 
@@ -166,82 +161,493 @@ void MyScene::movePlayer()
         }
 
     }
+
     /*
     MOVE THE BACKGROUND
     ff is the minimum shift (0 * shift, which equals 0) and the maximum shift (1 * shift, which equals shift).
     The calculation reads: If we subtract the width of the view (width()) from the virtual field's width m_fieldWidth, we have the area
-    where the player isn't moved by (m_player->moveBy()) because in that range only the background should move.
+    where the player isn't moved by (m_player->moveBy()) because in that range only thebackground should move.
     How often the moving of the player was skipped is saved in m_skippedMoving. So by
     dividing m_skippedMoving through m_fieldWidth – width(), we get the needed factor.
     */
     qreal ff = qMin(1.0, m_skippedMoving/(m_fieldWidth - width()));
     m_sky->setPos(-(m_sky->boundingRect().width() - width()) * ff, 0);
-   // m_grass->setPos(-(m_grass->boundingRect().width() - width()) * ff, m_grass->y());
-    m_Scene->setPos(-(m_Scene->boundingRect().width() - width()) * ff, m_Scene->y());
-    m_coins->setPos(-(m_coins->boundingRect().width() - width()) * ff, m_coins->y());
-    m_tube->setPos(300+(m_tube->boundingRect().width() - width()) * ff*3, m_tube->y());
 
-    checkColliding();
+    m_coins->setPos( 1300+(m_coins->boundingRect().width()  - width()) * ff * 5.06, m_coins->y());
+    m_coins2->setPos(1300+(m_coins2->boundingRect().width() - width()) * ff * 5.06, m_coins2->y());
+    m_coins3->setPos(1300+(m_coins3->boundingRect().width() - width()) * ff * 5.06, m_coins3->y());
+    m_coins4->setPos(1300+(m_coins4->boundingRect().width() - width()) * ff * 5.06, m_coins4->y());
+    m_coins5->setPos(1350+(m_coins5->boundingRect().width() - width()) * ff * 5.06, m_coins5->y());
+    m_coins6->setPos(1400+(m_coins6->boundingRect().width() - width()) * ff * 5.06, m_coins6->y());
+    m_coins7->setPos(1400+(m_coins7->boundingRect().width() - width()) * ff * 5.06, m_coins7->y());
+    m_coins8->setPos(1350+(m_coins8->boundingRect().width() - width()) * ff * 5.06, m_coins8->y());
+    m_coins9->setPos(1400+(m_coins9->boundingRect().width() - width()) * ff * 5.06, m_coins9->y());
+    m_coins10->setPos(1500+(m_coins10->boundingRect().width() - width()) * ff * 5.06, m_coins10->y());
+    m_coins11->setPos(1500+(m_coins11->boundingRect().width() - width()) * ff * 5.06, m_coins11->y());
+    m_coins12->setPos(1500+(m_coins12->boundingRect().width() - width()) * ff * 5.06, m_coins12->y());
+    m_coins13->setPos(1500+(m_coins13->boundingRect().width() - width()) * ff * 5.06, m_coins13->y());
+    m_coins14->setPos(1550+(m_coins14->boundingRect().width() - width()) * ff * 5.06, m_coins14->y());
+    m_coins15->setPos(1600+(m_coins15->boundingRect().width() - width()) * ff * 5.06, m_coins15->y());
+    m_coins16->setPos(1500+(m_coins16->boundingRect().width() - width()) * ff * 5.06, m_coins16->y());
+    m_coins17->setPos(1550+(m_coins17->boundingRect().width() - width()) * ff * 5.06, m_coins17->y());
+    m_coins18->setPos(1600+(m_coins18->boundingRect().width() - width()) * ff * 5.06, m_coins18->y());
+    m_coins19->setPos(1700+(m_coins19->boundingRect().width() - width()) * ff * 5.06, m_coins19->y());
+    m_coins20->setPos(1700+(m_coins20->boundingRect().width() - width()) * ff * 5.06, m_coins20->y());
+    m_coins21->setPos(1700+(m_coins21->boundingRect().width() - width()) * ff * 5.06, m_coins21->y());
+    m_coins22->setPos(1700+(m_coins22->boundingRect().width() - width()) * ff * 5.06, m_coins22->y());
+    m_coins23->setPos(1750+(m_coins23->boundingRect().width() - width()) * ff * 5.06, m_coins23->y());
+    m_coins24->setPos(1800+(m_coins24->boundingRect().width() - width()) * ff * 5.06, m_coins24->y());
+    m_coins25->setPos(1750+(m_coins25->boundingRect().width() - width()) * ff * 5.06, m_coins25->y());
+    m_coins26->setPos(1800+(m_coins26->boundingRect().width() - width()) * ff * 5.06, m_coins26->y());
+
+    m_goomba->setPos(600+(m_goomba->boundingRect().width() - width()) * ff * 5.06, m_goomba->y());
+    m_Scene->setPos(-(m_Scene->boundingRect().width() - width()) * ff, m_Scene->y());
+    m_flag->setPos(6700+(m_flag->boundingRect().width() - width()) * ff * 5.5, m_flag->y());
+    m_castle->setPos(7230+(m_castle->boundingRect().width() - width()) * ff * 6.9, m_castle->y());
+    h_castle->setPos(7230+(h_castle->boundingRect().width() - width()) * ff * 6.9, h_castle->y());
+
+    m_cluster9->setPos(2000+(m_cluster9->boundingRect().width() - width()) * ff * 7.41, m_cluster9->y());
+    m_cluster8->setPos(2050+(m_cluster8->boundingRect().width() - width()) * ff * 7.01, m_cluster8->y());
+    m_cluster7->setPos(2089+(m_cluster7->boundingRect().width() - width()) * ff * 6.62, m_cluster7->y());
+    m_cluster6->setPos(2134+(m_cluster6->boundingRect().width() - width()) * ff * 6.29, m_cluster6->y());
+    m_cluster5->setPos(2182+(m_cluster5->boundingRect().width() - width()) * ff * 6.0, m_cluster5->y());
+    m_cluster4->setPos(2228+(m_cluster4->boundingRect().width() - width()) * ff * 5.73, m_cluster4->y());
+    m_cluster3->setPos(2276+(m_cluster3->boundingRect().width() - width()) * ff * 5.49, m_cluster3->y());
+    m_cluster2->setPos(2322+(m_cluster2->boundingRect().width() - width()) * ff * 5.26, m_cluster2->y());
+
+    m_glowbrick->setPos(592+(m_glowbrick->boundingRect().width() - width()) * ff * 5.06, m_glowbrick->y());
+    m_glowbrick2->setPos(545+(m_glowbrick2->boundingRect().width() - width()) * ff * 5.06, m_glowbrick2->y());
+    m_glowbrick3->setPos(498+(m_glowbrick3->boundingRect().width() - width()) * ff * 5.06, m_glowbrick3->y());
+    m_glowbrick4->setPos(451+(m_glowbrick4->boundingRect().width() - width()) * ff * 5.06, m_glowbrick4->y());
+    m_glowbrick5->setPos(1000+(m_glowbrick5->boundingRect().width() - width()) * ff * 5.06, m_glowbrick5->y());
+    m_glowbrick6->setPos(1000+(m_glowbrick6->boundingRect().width() - width()) * ff * 5.06, m_glowbrick6->y());
+    m_glowbrick7->setPos(1047+(m_glowbrick7->boundingRect().width() - width()) * ff * 5.06, m_glowbrick7->y());
+    m_glowbrick8->setPos(1094+(m_glowbrick8->boundingRect().width() - width()) * ff * 5.06, m_glowbrick8->y());
+    m_glowbrick9->setPos(1141+(m_glowbrick9->boundingRect().width() - width()) * ff * 5.06, m_glowbrick9->y());
+    m_glowbrick10->setPos(1188+(m_glowbrick10->boundingRect().width() - width()) * ff * 5.06, m_glowbrick10->y());
+    m_glowbrick11->setPos(1188+(m_glowbrick11->boundingRect().width() - width()) * ff * 5.06, m_glowbrick11->y());
+    m_glowbrick12->setPos(404+(m_glowbrick12->boundingRect().width() - width()) * ff * 5.06, m_glowbrick12->y());
+    m_glowbrick13->setPos(1335+(m_glowbrick13->boundingRect().width() - width()) * ff * 5.06, m_glowbrick13->y());
+    m_glowbrick14->setPos(1535+(m_glowbrick14->boundingRect().width() - width()) * ff * 5.06, m_glowbrick14->y());
+    m_glowbrick15->setPos(1735+(m_glowbrick15->boundingRect().width() - width()) * ff * 5.06, m_glowbrick15->y());
+    m_glowbrick16->setPos(2800+(m_glowbrick16->boundingRect().width() - width()) * ff * 5.06, m_glowbrick16->y());
+    m_glowbrick17->setPos(2706+(m_glowbrick17->boundingRect().width() - width()) * ff * 5.06, m_glowbrick17->y());
+    m_glowbrick18->setPos(2610+(m_glowbrick18->boundingRect().width() - width()) * ff * 5.06, m_glowbrick18->y());
+
+    m_warpTube->setPos(800+(m_warpTube->boundingRect().width() - width()) * ff * 5.15, m_warpTube->y());
+    m_warpTube2->setPos(3000+(m_warpTube->boundingRect().width() - width()) * ff * 5.15, m_warpTube->y());
+    m_goomba->setPos(600+(m_goomba->boundingRect().width() - width()) * ff * 5.15, m_goomba->y());
+    m_questbox->setPos(640+(m_questbox->boundingRect().width() - width()) * ff * 5.06, m_questbox->y());
+    m_questbox2->setPos(2753+(m_questbox2->boundingRect().width() - width()) * ff * 5.06, m_questbox2->y());
+    m_questbox3->setPos(2658+(m_questbox3->boundingRect().width() - width()) * ff * 5.06, m_questbox3->y());
+    m_turtle->setPos(994+(m_turtle->boundingRect().width() - width()) * ff * 5.15, m_turtle->y());
+    m_piranha->setPos(773+(m_piranha->boundingRect().width() - width()) * ff * 5.4, m_piranha->y());
+    m_piranha2->setPos(2965+(m_piranha2->boundingRect().width() - width()) * ff * 5.4, m_piranha2->y());
+    m_ground->setPos(-(m_ground->boundingRect().width() - width()) * ff , m_ground->y());
+
+   // checkColliding();
 }
 
-void MyScene::jumpPlayer()
-{
+void MyScene::jumpPlayer(){
+
     if (QAbstractAnimation::Stopped == m_jumpAnimation->state())
         return;
 
     const qreal y = (m_groundLevel - m_player->boundingRect().height()) - m_jumpAnimation->currentValue().toReal() * m_jumpHeight;
     m_player->setPos(m_player->pos().x(), y);
 
-    checkColliding();
+    //checkColliding();
 }
-// All animations inside the playing field are done by moving items, not the scene.
-void MyScene::initPlayField()
-{
-    setSceneRect(0,0,800,340);
-    m_groundLevel = 300;
 
+// All animations inside the playing field are done by moving items, not the scene.
+void MyScene::initPlayField(){
+
+    setSceneRect(0,0,1280,720);
+    m_groundLevel = 660;
+
+    //add sky
     m_sky = new BackgroundItem(QPixmap(":images/sky"));
     addItem(m_sky);
 
-    BackgroundItem *ground = new BackgroundItem(QPixmap(":images/ground"));
-    addItem(ground);
-    ground->setPos(0, m_groundLevel );
+    //add ground
+    m_ground = new BackgroundItem(QPixmap(":images/ground"));
+    addItem(m_ground);
+    m_ground->setPos(0, m_groundLevel );
 
+    //add scene
     m_Scene = new BackgroundItem(QPixmap(":images/Scene"));
     m_Scene->setPos(0, m_groundLevel - m_Scene->boundingRect().height());
     addItem(m_Scene);
 
+    m_cluster9 = new BackgroundItem(QPixmap(":images/cluster9"));
+    m_cluster9->setPos(2000, m_groundLevel - m_cluster9->boundingRect().height());
+    addItem(m_cluster9);
+
+    m_cluster8 = new BackgroundItem(QPixmap(":images/cluster8"));
+    m_cluster8->setPos(2050, m_groundLevel - m_cluster8->boundingRect().height()-50);
+    addItem(m_cluster8);
+
+    m_cluster7 = new BackgroundItem(QPixmap(":images/cluster7"));
+    m_cluster7->setPos(2089, m_groundLevel - m_cluster7->boundingRect().height()-100);
+    addItem(m_cluster7);
+
+    m_cluster6 = new BackgroundItem(QPixmap(":images/cluster6"));
+    m_cluster6->setPos(2134, m_groundLevel - m_cluster6->boundingRect().height()-150);
+    addItem(m_cluster6);
+
+    m_cluster5 = new BackgroundItem(QPixmap(":images/cluster5"));
+    m_cluster5->setPos(2182, m_groundLevel - m_cluster5->boundingRect().height()-200);
+    addItem(m_cluster5);
+
+    m_cluster4 = new BackgroundItem(QPixmap(":images/cluster4"));
+    m_cluster4->setPos(2228, m_groundLevel - m_cluster4->boundingRect().height()-250);
+    addItem(m_cluster4);
+
+    m_cluster3 = new BackgroundItem(QPixmap(":images/cluster3"));
+    m_cluster3->setPos(2276, m_groundLevel - m_cluster3->boundingRect().height()-300);
+    addItem(m_cluster3);
+
+    m_cluster2 = new BackgroundItem(QPixmap(":images/cluster2"));
+    m_cluster2->setPos(2322, m_groundLevel - m_cluster2->boundingRect().height()-350);
+    addItem(m_cluster2);
+
+    //add warp tube
+    m_warpTube = new BackgroundItem(QPixmap(":images/Warp.png"));
+    m_warpTube->setPos(800, m_groundLevel - m_warpTube->boundingRect().height());
+    addItem(m_warpTube);
+
+    m_warpTube2 = new BackgroundItem(QPixmap(":images/Warp.png"));
+    m_warpTube2->setPos(3000, m_groundLevel - m_warpTube2->boundingRect().height());
+    addItem(m_warpTube2);
+
+    //add flag
+    m_flag = new BackgroundItem(QPixmap(":images/flag"));
+    m_flag->setPos(6700, m_groundLevel - m_flag->boundingRect().height());
+    addItem(m_flag);
+
+    m_castle = new BackgroundItem(QPixmap(":images/castle"));
+    m_castle->setPos(7230, m_groundLevel - m_castle->boundingRect().height());
+    addItem(m_castle);
+
+    m_coins = new Coin();
+    m_coins->setPos(1300, m_groundLevel - m_coins->boundingRect().height()-200);
+    addItem(m_coins);
+    startTimer( 100 );
+
+    m_coins2 = new Coin();
+    m_coins2->setPos(1300, m_groundLevel - m_coins2->boundingRect().height()-250);
+    addItem(m_coins2);    
+
+    m_coins3 = new Coin();
+    m_coins3->setPos(1300, m_groundLevel - m_coins3->boundingRect().height()-300);
+    addItem(m_coins3);    
+
+    m_coins4 = new Coin();
+    m_coins4->setPos(1300, m_groundLevel - m_coins4->boundingRect().height()-350);
+    addItem(m_coins4);  
+
+    m_coins5 = new Coin();
+    m_coins5->setPos(1350, m_groundLevel - m_coins5->boundingRect().height()-350);
+    addItem(m_coins5);    
+
+    m_coins6 = new Coin();
+    m_coins6->setPos(1400, m_groundLevel - m_coins6->boundingRect().height()-350);
+    addItem(m_coins6);  
+
+    m_coins7 = new Coin();
+    m_coins7->setPos(1400, m_groundLevel - m_coins7->boundingRect().height()-300);
+    addItem(m_coins7);
+
+    m_coins8 = new Coin();
+    m_coins8->setPos(1350, m_groundLevel - m_coins8->boundingRect().height()-250);
+    addItem(m_coins8);
+
+    m_coins9 = new Coin();
+    m_coins9->setPos(1400, m_groundLevel - m_coins9->boundingRect().height()-200);
+    addItem(m_coins9);
+
+    m_coins10 = new Coin();
+    m_coins10->setPos(1500, m_groundLevel - m_coins10->boundingRect().height()-200);
+    addItem(m_coins10);
+
+    m_coins11 = new Coin();
+    m_coins11->setPos(1500, m_groundLevel - m_coins11->boundingRect().height()-250);
+    addItem(m_coins11);
+
+    m_coins12 = new Coin();
+    m_coins12->setPos(1500, m_groundLevel - m_coins12->boundingRect().height()-300);
+    addItem(m_coins12);
+
+    m_coins13 = new Coin();
+    m_coins13->setPos(1500, m_groundLevel - m_coins13->boundingRect().height()-350);
+    addItem(m_coins13);
+
+    m_coins14 = new Coin();
+    m_coins14->setPos(1550, m_groundLevel -  m_coins14->boundingRect().height()-350);
+    addItem( m_coins14);
+
+    m_coins15 = new Coin();
+    m_coins15->setPos(1600, m_groundLevel - m_coins15->boundingRect().height()-350);
+    addItem(m_coins15);
+
+    m_coins16 = new Coin();
+    m_coins16->setPos(1500, m_groundLevel - m_coins16->boundingRect().height()-200);
+    addItem(m_coins16);
+
+    m_coins17 = new Coin();
+    m_coins17->setPos(1550, m_groundLevel - m_coins17->boundingRect().height()-200);
+    addItem(m_coins17);
+
+    m_coins18 = new Coin();
+    m_coins18->setPos(1600, m_groundLevel - m_coins18->boundingRect().height()-200);
+    addItem(m_coins18);
+
+    m_coins19 = new Coin();
+    m_coins19->setPos(1700, m_groundLevel - m_coins19->boundingRect().height()-200);
+    addItem(m_coins19);
+
+    m_coins20 = new Coin();
+    m_coins20->setPos(1700, m_groundLevel - m_coins20->boundingRect().height()-250);
+    addItem(m_coins20);
+
+    m_coins21 = new Coin();
+    m_coins21->setPos(1700, m_groundLevel - m_coins21->boundingRect().height()-300);
+    addItem(m_coins21);
+
+    m_coins22 = new Coin();
+    m_coins22->setPos(1700, m_groundLevel - m_coins22->boundingRect().height()-350);
+    addItem(m_coins22);
+
+    m_coins23 = new Coin();
+    m_coins23->setPos(1750, m_groundLevel - m_coins23->boundingRect().height()-350);
+    addItem(m_coins23);
+
+    m_coins24 = new Coin();
+    m_coins24->setPos(1800, m_groundLevel - m_coins24->boundingRect().height()-350);
+    addItem(m_coins24);
+
+    m_coins25 = new Coin();
+    m_coins25->setPos(1750, m_groundLevel - m_coins25->boundingRect().height()-200);
+    addItem(m_coins25);
+
+    m_coins26 = new Coin();
+    m_coins26->setPos(1800, m_groundLevel - m_coins26->boundingRect().height()-200);
+    addItem(m_coins26);
+
+   //Add Goomba
+    m_goomba = new Goomba();
+    m_goomba->setPos(600, m_groundLevel - m_goomba->boundingRect().height()-150);
+    addItem(m_goomba);
+
+   //Add Questionbox
+    m_questbox = new QuestBox();
+    m_questbox->setPos(640, m_groundLevel - m_questbox->boundingRect().height()-100);
+    addItem(m_questbox);
+
+    m_questbox2 = new QuestBox();
+    m_questbox2->setPos(2753, m_groundLevel - m_questbox2->boundingRect().height()-100);
+    addItem(m_questbox2);
+
+    m_questbox3 = new QuestBox();
+    m_questbox3->setPos(2658, m_groundLevel - m_questbox3->boundingRect().height()-100);
+    addItem(m_questbox3);
+
+    m_glowbrick = new GlowBrick();
+    m_glowbrick->setPos(592, m_groundLevel - m_glowbrick->boundingRect().height()-100);
+    addItem(m_glowbrick);
+
+    m_glowbrick2 = new GlowBrick();
+    m_glowbrick2->setPos(545, m_groundLevel - m_glowbrick2->boundingRect().height()-100);
+    addItem(m_glowbrick2);
+
+    m_glowbrick3 = new GlowBrick();
+    m_glowbrick3->setPos(498, m_groundLevel - m_glowbrick3->boundingRect().height()-100);
+    addItem(m_glowbrick3);
+
+    m_glowbrick4 = new GlowBrick();
+    m_glowbrick4->setPos(451, m_groundLevel - m_glowbrick4->boundingRect().height()-100);
+    addItem(m_glowbrick4);
+
+    m_glowbrick5 = new GlowBrick();
+    m_glowbrick5->setPos(1000, m_groundLevel - m_glowbrick5->boundingRect().height()-150);
+    addItem(m_glowbrick5);
+
+    m_glowbrick6 = new GlowBrick();
+    m_glowbrick6->setPos(1000, m_groundLevel - m_glowbrick6->boundingRect().height()-100);
+    addItem(m_glowbrick6);
+
+    m_glowbrick7 = new GlowBrick();
+    m_glowbrick7->setPos(1047, m_groundLevel - m_glowbrick7->boundingRect().height()-100);
+    addItem(m_glowbrick7);
+
+    m_glowbrick8 = new GlowBrick();
+    m_glowbrick8->setPos(1094, m_groundLevel - m_glowbrick8->boundingRect().height()-100);
+    addItem(m_glowbrick8);
+
+    m_glowbrick9 = new GlowBrick();
+    m_glowbrick9->setPos(1141, m_groundLevel - m_glowbrick9->boundingRect().height()-100);
+    addItem(m_glowbrick9);
+
+    m_glowbrick10 = new GlowBrick();
+    m_glowbrick10->setPos(1188, m_groundLevel - m_glowbrick10->boundingRect().height()-100);
+    addItem(m_glowbrick10);
+
+    m_glowbrick11 = new GlowBrick();
+    m_glowbrick11->setPos(1188, m_groundLevel - m_glowbrick11->boundingRect().height()-150);
+    addItem(m_glowbrick11);
+
+    m_glowbrick12 = new GlowBrick();
+    m_glowbrick12->setPos(404, m_groundLevel - m_glowbrick12->boundingRect().height()-100);
+    addItem(m_glowbrick12);
+
+    m_glowbrick13 = new GlowBrick();
+    m_glowbrick13->setPos(1335, m_groundLevel - m_glowbrick13->boundingRect().height()-150);
+    addItem(m_glowbrick13);
+
+    m_glowbrick14 = new GlowBrick();
+    m_glowbrick14->setPos(1535, m_groundLevel - m_glowbrick14->boundingRect().height()-150);
+    addItem(m_glowbrick14);
+
+    m_glowbrick15 = new GlowBrick();
+    m_glowbrick15->setPos(1735, m_groundLevel - m_glowbrick15->boundingRect().height()-150);
+    addItem(m_glowbrick15);
+
+    m_glowbrick16 = new GlowBrick();
+    m_glowbrick16->setPos(2800, m_groundLevel - m_glowbrick16->boundingRect().height()-100);
+    addItem(m_glowbrick16);
+
+    m_glowbrick17 = new GlowBrick();
+    m_glowbrick17->setPos(2706, m_groundLevel - m_glowbrick17->boundingRect().height()-100);
+    addItem(m_glowbrick17);
+
+    m_glowbrick18 = new GlowBrick();
+    m_glowbrick18->setPos(2610, m_groundLevel - m_glowbrick18->boundingRect().height()-100);
+    addItem(m_glowbrick18);
+
+    m_turtle = new Turtle();
+    m_turtle->setPos(994, m_groundLevel - m_turtle->boundingRect().height()-200);
+    addItem(m_turtle);
+
+    m_piranha = new Piranha();
+    m_piranha->setPos(773, m_groundLevel - m_piranha->boundingRect().height()-95);
+    addItem(m_piranha);
+
+    m_piranha2 = new Piranha();
+    m_piranha2->setPos(2965, m_groundLevel - m_piranha2->boundingRect().height()-95);
+    addItem(m_piranha2);
+
+    //add player
     m_player = new Player();
-    m_minX = m_player->boundingRect().width();
-    m_maxX = m_fieldWidth - m_player->boundingRect().width();
-    m_player->setPos(120, m_groundLevel - m_player->boundingRect().height() );
+    m_minX = m_player->boundingRect().width()/2 ;
+    m_maxX = m_fieldWidth - m_player->boundingRect().width() * 1.5;
+    m_player->setPos(m_minX, m_groundLevel - m_player->boundingRect().height() );
     m_realPos = m_minX;
     addItem(m_player);
 
-    m_tube = new Tube();
-    m_tube->setPos(300, m_groundLevel - m_tube->boundingRect().height() );
-    addItem(m_tube);
+    //m_castle2 = new BackgroundItem(QPixmap(":images/hcastle"));
+    //m_castle2->setPos(5500, m_groundLevel - m_castle2->boundingRect().height());
+    //addItem(m_castle2);
 
-    // Add some coins
-    int xrange = (m_maxX - m_minX) * 0.94;
-    int hrange = m_jumpHeight;
-    m_coins = new QGraphicsRectItem(0,0,m_fieldWidth, m_jumpHeight);
-    m_coins->setPen(Qt::NoPen);
-    for (int i = 0; i < 25; ++i) {
-        Coin *c = new Coin(m_coins);
-        c->setPos(m_minX + qrand()%xrange, qrand()%hrange);
-    }
-    addItem(m_coins);
-    m_coins->setPos(0, m_groundLevel - m_jumpHeight);
+    //int xrang = (m_maxX - m_minX) * 0.94;
+    h_castle = new Castle();
+    h_castle->setPos(7230, m_groundLevel - h_castle->boundingRect().height());
+    addItem(h_castle);
+
+
+/*
+    Coin *C = new Coin();
+    C->setPos(1000, m_groundLevel - C->boundingRect().height()-200);
+    addItem(C);
+    m_coins.append(C);
+    startTimer( 100 );
+
+    Coin *A = new Coin();
+    A->setPos(1050, m_groundLevel - A->boundingRect().height()-200);
+    addItem(A);
+    m_coins.append(A);
+    startTimer( 100 );
+*/
+/*
+      //ADD COINS
+      int xrange = (m_maxX - m_minX) * 0.94;
+      int hrange = m_jumpHeight;
+
+      for (int i = 0; i < 55; ++i) {
+        Coin *C = new Coin();
+        C->setPos(m_minX + qrand()%xrange, qrand()%hrange+400);
+        addItem(C);
+        m_coins.append(C);
+      }
+
+      startTimer( 100 );
+      */
 }
 
-qreal MyScene::jumpFactor() const
-{
+//TIMER EVENT ADDED FOR COINS
+void MyScene::timerEvent(QTimerEvent *){
+
+    m_coins->nextFrame2();
+    m_coins2->nextFrame2();
+    m_coins3->nextFrame2();
+    m_coins4->nextFrame2();
+    m_coins5->nextFrame2();
+    m_coins6->nextFrame2();
+    m_coins7->nextFrame2();
+    m_coins8->nextFrame2();
+    m_coins9->nextFrame2();
+    m_coins10->nextFrame2();
+    m_coins11->nextFrame2();
+    m_coins12->nextFrame2();
+    m_coins13->nextFrame2();
+    m_coins14->nextFrame2();
+    m_coins15->nextFrame2();
+    m_coins16->nextFrame2();
+    m_coins17->nextFrame2();
+    m_coins18->nextFrame2();
+    m_coins19->nextFrame2();
+    m_coins20->nextFrame2();
+    m_coins21->nextFrame2();
+    m_coins22->nextFrame2();
+    m_coins23->nextFrame2();
+    m_coins24->nextFrame2();
+    m_coins25->nextFrame2();
+    m_coins26->nextFrame2();
+
+    m_goomba->nextFrame3();
+    m_questbox->nextFrame4();
+    m_questbox2->nextFrame4();
+    m_questbox3->nextFrame4();
+
+    m_glowbrick->nextFrame5();
+    m_glowbrick2->nextFrame5();
+    m_glowbrick3->nextFrame5();
+    m_glowbrick4->nextFrame5();
+    m_glowbrick5->nextFrame5();
+    m_glowbrick6->nextFrame5();
+    m_glowbrick7->nextFrame5();
+    m_glowbrick8->nextFrame5();
+    m_glowbrick9->nextFrame5();
+    m_glowbrick10->nextFrame5();
+    m_glowbrick11->nextFrame5();
+    m_glowbrick12->nextFrame5();
+    m_glowbrick13->nextFrame5();
+    m_glowbrick14->nextFrame5();
+    m_glowbrick15->nextFrame5();
+    m_glowbrick16->nextFrame5();
+    m_glowbrick17->nextFrame5();
+    m_glowbrick18->nextFrame5();
+
+    m_turtle->nextFrame6();
+    m_piranha->nextFrame7();
+    m_piranha2->nextFrame7();
+}
+
+
+qreal MyScene::jumpFactor() const{
     return m_jumpFactor;
 }
 
-void MyScene::setJumpFactor(const qreal &jumpFactor)
-{
+void MyScene::setJumpFactor(const qreal &jumpFactor){
     if (m_jumpFactor == jumpFactor)
         return;
 
@@ -249,8 +655,8 @@ void MyScene::setJumpFactor(const qreal &jumpFactor)
     emit jumpFactorChanged(m_jumpFactor);
 }
 
-void MyScene::checkTimer()
-{
+void MyScene::checkTimer(){
+
     //If player is not moving, stop the timer
     if (0 == m_player->direction())
         m_timer.stop();
@@ -259,15 +665,17 @@ void MyScene::checkTimer()
         m_timer.start();
 }
 
+
+
+/*
 void MyScene::checkColliding()
 {
     QList<QGraphicsItem*> items =  collidingItems(m_player);
-    for (int i = 0, total = items.count(); i < total; ++i) {
-        if (Coin *c = qgraphicsitem_cast<Coin*>(items.at(i)))         
-            c->explode();
+   for (int i = 0, total = items.count(); i < total; ++i) {
+        if (Coin *c = qgraphicsitem_cast<Coin*>(items.at(i)))
+           c->explode();
     }
 
 }
 
-
-
+*/

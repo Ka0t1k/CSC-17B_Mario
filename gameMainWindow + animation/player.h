@@ -6,7 +6,7 @@
 class Player : public QGraphicsItem
 {
 public:
-    explicit Player(QGraphicsItem *parent = 0);
+     Player(QGraphicsItem *parent = 0);
     int direction() const;
     void addDirection(int direction);
     void nextFrame();
@@ -15,10 +15,9 @@ public:
 
 private:
     int m_direction;
-    int mCurrentFrame;
+    int mCurrentFrame;    
     QPixmap mPixmap;
 
 };
 
 #endif // PLAYER_H
-

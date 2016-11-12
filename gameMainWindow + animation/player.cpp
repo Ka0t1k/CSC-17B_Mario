@@ -4,18 +4,18 @@
 
 Player::Player(QGraphicsItem *parent)
     : QGraphicsItem(parent)
-    , m_direction(),mCurrentFrame()
+    ,m_direction(0),mCurrentFrame()
 {
-
     setFlag(ItemClipsToShape);
     mPixmap = QPixmap(":images/mario_walk_2.png");
     setTransformOriginPoint(boundingRect().center());
-
 }
+
 
 int Player::direction() const
 {
     return m_direction;
+
 }
 
 void Player::nextFrame(){
@@ -26,11 +26,13 @@ void Player::nextFrame(){
 }
 
 QRectF Player::boundingRect() const {
-    return QRectF(0,0,46,63);
+    return QRectF(0,0,45,62);
+
 }
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    painter->drawPixmap(0,0, mPixmap, mCurrentFrame, 0,46, 63);
+    painter->drawPixmap(0,0, mPixmap, mCurrentFrame, 0,45, 62);
+    setTransformOriginPoint(boundingRect().center());
 }
 
 void Player::addDirection(int direction){
@@ -48,9 +50,4 @@ void Player::addDirection(int direction){
             setTransform(QTransform());
     }
 }
-
-
-
-
-
 

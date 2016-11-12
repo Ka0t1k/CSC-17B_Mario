@@ -4,7 +4,7 @@
 #include "mainwindow.h"
 #include "myscene.h"
 class View;
-class MyScene;
+class placeHolderScene;
 
 class AnimatedGraphicsItem : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -17,6 +17,7 @@ public:
     Title(View *view, QWidget *parent = 0);
 signals:
     void quitGame();
+    void playSound(QString);
 protected:
     void keyPressEvent(QKeyEvent *event);
 private:
@@ -33,8 +34,6 @@ private:
     QGraphicsTextItem *quit;
     QMediaPlaylist *playlist;
     QPropertyAnimation *animation;
-    QSoundEffect *selectSFX;
-
     MyScene *scene;
 };
 

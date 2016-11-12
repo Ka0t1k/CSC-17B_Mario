@@ -2,6 +2,14 @@
 #include <iostream>
 
 MainWindow::MainWindow(){
+    //ARA I initialize the sound manager and pass the mainwindow object to it
+    //the connectSound function connects the playSound signal to the playSound
+    //slot of the manager. I MIGHT NEED TO ADD OVERLOADED FUNCTIONS FOR PLAY OPTIONS
+    this->soundManager = new Ara_Sound_Manager;
+    soundManager->connectSound(this);
+    //playSoundEffect is a public slot so it can be called.
+    soundManager->playSoundEffect("theme");
+
     createActions();
     createMenus();
     createScene();
@@ -40,9 +48,9 @@ void MainWindow::createActions(){
     aboutAction = new QAction(tr("&About"), this);
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
 
-    music = new QMediaPlayer();
     setting = new Settings(this);
-    connect(setting, SIGNAL(volumeAdjust(int)), this, SLOT(volumeAdjust(int)));
+    connect(setting, SIGNAL(bgmAdjust(int)), this, SLOT(bgmAdjust(int)));
+    connect(setting, SIGNAL(sfxAdjust(int)), this, SLOT(sfxAdjust(int)));
     connect(setting, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
     setting->readSettings();
 }
@@ -72,8 +80,8 @@ void MainWindow::createMenus(){
 
 void MainWindow::createScene(){
     view = new View;
-    connect(view, SIGNAL(sceneChanged()), this, SLOT(setMusic()));
     title = new Title(view);
+    this->soundManager->connectSound(title);
 }
 
 void MainWindow::setSize(){
@@ -112,14 +120,14 @@ void MainWindow::alterScreen(){
     setting->alterState();
 }
 
-void MainWindow::setMusic(){
-    music->setPlaylist(view->bgm);
-    music->play();
+void MainWindow::bgmAdjust(int volume){
+    soundManager->setBGMVolume(volume);
 }
 
-void MainWindow::volumeAdjust(int volume){
-    music->setVolume(volume);
+void MainWindow::sfxAdjust(int volume){
+    //soundManager->setSFXVolume(volume);
 }
+
 
 void MainWindow::showAbout(){
     about = new About_Dialog;

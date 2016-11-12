@@ -1,25 +1,25 @@
 #ifndef COIN_H
 #define COIN_H
 
-#include <QObject>
-#include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QPixmap>
 
-class Coin : public QObject, public QGraphicsEllipseItem
+class Coin : public QGraphicsItem
 {
-    Q_OBJECT
-    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
-    Q_PROPERTY(QRectF rect READ rect WRITE setRect)
-
 public:
-    explicit Coin(QGraphicsItem *parent = 0);
-
-    enum { Type = UserType + 1 };
-    int type() const;
-
-    void explode();
+    Coin(QGraphicsItem *parent = 0);
+    void nextFrame2();
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    //QPoint pos() const;
 
 private:
-    bool m_explosion;
+
+    int mCurrentFrame2;
+    QPixmap mPixmap2;
+
+   // QPoint mPos;
+
 };
 
 #endif // COIN_H

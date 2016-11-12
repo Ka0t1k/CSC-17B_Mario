@@ -12,17 +12,30 @@
         <file>font/SuperMario256.ttf</file>
         <file>music/Select.wav</file>
         <file>images/background.png</file>
-        <file>images/grass.png</file>
+        <file>images/brick.png</file>
+        <file>images/castle.png</file>
+        <file>images/cluster2.png</file>
+        <file>images/cluster3.png</file>
+        <file>images/cluster4.png</file>
+        <file>images/cluster5.png</file>
+        <file>images/cluster6.png</file>
+        <file>images/cluster7.png</file>
+        <file>images/cluster8.png</file>
+        <file>images/cluster9.png</file>
+        <file>images/coin.png</file>
+        <file>images/flag.png</file>
+        <file>images/goombas.png</file>
         <file>images/ground.png</file>
+        <file>images/groundx.png</file>
+        <file>images/hcastle.png</file>
         <file>images/logo2.png</file>
-        <file>images/mario_stop.png</file>
         <file>images/mario_walk_2.png</file>
-        <file>images/mario_walk.png</file>
-        <file>images/Mario.png</file>
         <file>images/mariosplash.png</file>
+        <file>images/piranha.png</file>
+        <file>images/questbox.png</file>
         <file>images/Scene.png</file>
         <file>images/sky.png</file>
-        <file>images/volume.png</file>
+        <file>images/turtle.png</file>
         <file>images/Warp.png</file>
     </qresource>
 </RCC>

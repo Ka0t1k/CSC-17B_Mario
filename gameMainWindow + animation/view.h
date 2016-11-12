@@ -9,8 +9,8 @@ signals:
     void sceneChanged();
 public:
     View();
-    void sceneSet(QMediaPlaylist *, QGraphicsScene *);
-    QMediaPlaylist *bgm;
+    void sceneSet(QGraphicsScene *);
+
 };
 
 #endif // VIEW_H

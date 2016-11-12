@@ -1,5 +1,3 @@
-/*
-
 #ifndef PLACEHOLDERSCENE_H
 #define PLACEHOLDERSCENE_H
 
@@ -16,5 +14,3 @@ private:
 };
 
 #endif // PLACEHOLDERSCENE_H
-
-*/

@@ -4,13 +4,6 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
 
     viewer = view;
 
-    playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
-    selectSFX = new QSoundEffect();
-    selectSFX->setSource(QUrl("qrc:/music/Select.wav"));
-
     background = new AnimatedGraphicsItem;
     background->setPixmap(QPixmap(":/images/background.png"));
     foreground = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
@@ -47,7 +40,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     addItem(quit);
 
     this->setFocus();
-    view->sceneSet(playlist, this);
+    view->sceneSet(this);
 }
 
 void Title::keyPressEvent(QKeyEvent *event){
@@ -59,7 +52,7 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection--;
             cursor->moveBy(0,-start->boundingRect().height());
         }
-        selectSFX->play();
+        emit playSound("select");
     }
     if(event->key() == Qt::Key_Down){
         if(selection == 1){
@@ -69,13 +62,12 @@ void Title::keyPressEvent(QKeyEvent *event){
             selection++;
             cursor->moveBy(0,start->boundingRect().height());
         }
-        selectSFX->play();
+        emit playSound("select");
     }
     if(event->key() == Qt::Key_Z){
         if(selection == 0){
             scene = new MyScene(viewer);
-            delete this;
-
+            viewer->sceneSet(scene);
         }
         if(selection == 1){
             qApp->exit();

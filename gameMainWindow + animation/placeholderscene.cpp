@@ -1,5 +1,3 @@
-/*
-
 #include "placeholderscene.h"
 
 placeHolderScene::placeHolderScene(View *view, QWidget *parent){
@@ -11,5 +9,3 @@ placeHolderScene::placeHolderScene(View *view, QWidget *parent){
 QMediaPlaylist *placeHolderScene::getMusic(){
     return playlist;
 }
-
-*/

@@ -28,10 +28,15 @@
 #include <QSplashScreen>
 #include <QStatusBar>
 #include <QStyle>
+
+#include "ara_sound_manager.h"
 #include "about_dialog.h"
+
 #include "settings.h"
 #include "title.h"
 #include "view.h"
+
+
 class About_Dialog;
 class Settings;
 class Title;
@@ -51,8 +56,8 @@ private slots:
     void settings();
     void fullScreen(bool);
     void alterScreen();
-    void setMusic();
-    void volumeAdjust(int);
+    void bgmAdjust(int);
+    void sfxAdjust(int);
     void showAbout();
 private:
     void createActions();
@@ -61,9 +66,12 @@ private:
     enum { maxState = 10 };
     Settings *setting;
     About_Dialog *about;
+
     Title *title;
     View *view;
+
     QRect screenGeometry = QApplication::desktop()->screenGeometry();
+
     QAction *returnAction;
     QAction *emptyAction;
     QAction *saveStateAction[maxState];
@@ -72,13 +80,18 @@ private:
     QAction *fullScreenAction;
     QAction *settingsAction;
     QAction *aboutAction;
+
     QMenu *fileMenu;
     QMenu *saveSubMenu;
     QMenu *loadSubMenu;
     QMenu *viewMenu;
     QMenu *toolMenu;
     QMenu *helpMenu;
-    QMediaPlayer *music;
+
+    Ara_Sound_Manager *soundManager;
+
+signals:
+    void playSound(QString);
 };
 
 #endif // MAINWINDOW_H
