@@ -29,15 +29,15 @@ SOURCES += main.cpp\
     piranha.cpp \
     player.cpp \
     questbox.cpp \
-    turtle.cpp
+    turtle.cpp \
+    about_dialog.cpp \
+    ara_sound_manager.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
             title.h \
             view.h \
     placeholderscene.h \
-    LibHeaders/about_dialog.h \
-    LibHeaders/ara_sound_manager.h \
     backgrounditem.h \
     castle.h \
     coin.h \
@@ -47,33 +47,15 @@ HEADERS  += mainwindow.h \
     piranha.h \
     player.h \
     questbox.h \
-    turtle.h
+    turtle.h \
+    about_dialog.h \
+    ara_sound_manager.h
 
-FORMS    +=
+FORMS    += \
+    about_dialog.ui \
+    ara_sound_manager.ui
 
 RESOURCES += \
-    mario.qrc
-
-#Libraries Headers Path
-INCLUDEPATH += $$PWD/LibHeaders
-DEPENDPATH += $$PWD/LibHeaders
-
-#------------------------------------------------------------#
-#-----------------------Mac Libraries------------------------#
-#------------------------------------------------------------#
-macx: LIBS += -L$$PWD/'MacLib/' -lAra_About_Dialog
-macx: PRE_TARGETDEPS += $$PWD/'MacLib/libAra_About_Dialog.a'
-
-macx: LIBS += -L$$PWD/'MacLib/' -lAra_Sound_Manager
-macx: PRE_TARGETDEPS += $$PWD/'MacLib/libAra_Sound_Manager.a'
-
-#------------------------------------------------------------#
-#-----------------------Win Libraries------------------------#
-#------------------------------------------------------------#
-win32: LIBS += -L$$PWD/'WinLib/' -lAra_About_Dialog
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/Ara_About_Dialog.lib'
-else:win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/libAra_About_Dialog.a'
-
-win32: LIBS += -L$$PWD/'WinLib/' -lAra_Sound_Manager
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/Ara_Sound_Manager.lib'
-else:win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/libAra_Sound_Manager.a'
+    mario.qrc \
+    images/AD_mario.qrc \
+    music/ara_sound_rsc.qrc
