@@ -31,12 +31,12 @@ Ara_Sound_Manager::Ara_Sound_Manager(QWidget *parent) :
     mario_death->setVolume(.25f);
 
     this->levelClear = new QSoundEffect;
-    levelClear->setSource(QUrl("qrc:/audio/levelClear.mp3"));
+    levelClear->setSource(QUrl("qrc:/audio/levelClear.wav"));
     levelClear->setLoopCount(0);
     levelClear->setVolume(.25f);
 
     this->ghost = new QSoundEffect;
-    ghost->setSource(QUrl("qrc:/audio/ghost.mp3"));
+    ghost->setSource(QUrl("qrc:/audio/ghost.wav"));
     ghost->setLoopCount(0);
     ghost->setVolume(.25f);
 
