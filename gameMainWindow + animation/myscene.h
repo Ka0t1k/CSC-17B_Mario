@@ -2,8 +2,8 @@
 #define MYSCENE_H
 #include <QGraphicsScene>
 #include <QTimer>
-#include<QMediaPlayer>
 #include <QAbstractAnimation>
+#include <QDebug>
 
 class QGraphicsPixmapItem;
 class QPropertyAnimation;
@@ -312,11 +312,6 @@ private:
 
     QGraphicsItem *m_platform;
     QScrollBar *scroll;
-
-    QMediaPlayer *music;
-    QMediaPlayer *death;
-    QMediaPlayer *levelClear;
-    QMediaPlayer *ghost;
 
 };
 

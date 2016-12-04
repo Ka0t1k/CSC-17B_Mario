@@ -29,9 +29,9 @@ public:
 private:
     Ui::Ara_Sound_Manager *ui;
 
-    QSoundEffect * mario_jump, * mario_death, * mario_mushroom, * coin, * select;
+    QSoundEffect * mario_jump, * mario_death, * mario_mushroom, * coin, * select, * levelClear, *ghost;
 
-    QMediaPlayer * soundPlayer;
+    QMediaPlayer * soundPlayer, * level1;
 
 
 public slots:

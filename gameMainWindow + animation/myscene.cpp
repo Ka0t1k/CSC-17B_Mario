@@ -69,7 +69,7 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     //Coin sound fx
     coinSound = new QMediaPlayer();
     coinSound->setMedia(QUrl("qrc:/audio/coin.mp3"));
-    */
+
     //Level Music
     music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/audio/level1.mp3"));
@@ -79,12 +79,13 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     death = new QMediaPlayer();
     death->setMedia(QUrl("qrc:/audio/death.mp3"));
 
+
     levelClear = new QMediaPlayer();
     levelClear->setMedia(QUrl("qrc:/audio/levelClear.mp3"));
 
     ghost = new QMediaPlayer();
     ghost->setMedia(QUrl("qrc:/audio/ghost.mp3"));
-
+    */
     m_jumpAnimation->setTargetObject(this);
     m_jumpAnimation->setPropertyName("jumpFactor");
     m_jumpAnimation->setStartValue(0);
@@ -96,6 +97,7 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     connect(m_jumpAnimation, &QPropertyAnimation::stateChanged, this, &MyScene::jumpStatusChanged);
     //ARA
     QObject::connect(this, SIGNAL(playSound(QString)),this->parent(),SIGNAL(playSound(QString)));
+    emit this->playSound("level1");
 }
 
 void MyScene::keyPressEvent(QKeyEvent *event)
@@ -1398,8 +1400,8 @@ void MyScene::checkCollidingPiranha() {
         Piranha* p = qgraphicsitem_cast<Piranha*>(item);
         if(p){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
 
             addItem(gameover);
             removeItem(p);
@@ -1416,8 +1418,8 @@ void MyScene::checkCollidingTurtle() {
         Turtle* t = qgraphicsitem_cast<Turtle*>(item);
         if(t){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
 
             addItem(gameover);
             removeItem(t);
@@ -1434,8 +1436,8 @@ void MyScene::checkCollidingGiantGoomba() {
         GiantGoomba* G = qgraphicsitem_cast<GiantGoomba*>(item);
         if(G){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
             addItem(gameover);
             removeItem(G);
             removeItem(m_player);
@@ -1452,8 +1454,8 @@ void MyScene::checkCollidingStretch() {
         Stretch* s = qgraphicsitem_cast<Stretch*>(item);
         if(s){
 
-            //music->stop();
-            ghost->play();
+
+            emit playSound("ghost");
             //addItem(gameover);
             removeItem(s);
         }
@@ -1468,9 +1470,9 @@ void MyScene::checkCollidingFlag() {
         Flag* f = qgraphicsitem_cast<Flag*>(item);
         if(f){
 
-             music->stop();
+
              addItem(courseclear);
-             levelClear->play();
+             emit playSound("level_clear");
              removeItem(m_player);
         }
     }
@@ -1498,8 +1500,8 @@ void MyScene::checkCollidingSpiny() {
         Spiny* s = qgraphicsitem_cast<Spiny*>(item);
         if(s){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
             addItem(gameover);
             removeItem(s);
             removeItem(m_player);
@@ -1515,8 +1517,8 @@ void MyScene::checkCollidingRedTurtle() {
         RedTurtle* r = qgraphicsitem_cast<RedTurtle*>(item);
         if(r){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
             addItem(gameover);
             removeItem(r);
             removeItem(m_player);
@@ -1532,8 +1534,8 @@ void MyScene::checkCollidingBomb() {
         Bomb* b = qgraphicsitem_cast<Bomb*>(item);
         if(b){
 
-            music->stop();
-            death->play();
+
+            emit playSound("mario_death");
             addItem(gameover);
             removeItem(b);
             removeItem(m_player);

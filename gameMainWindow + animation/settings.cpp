@@ -12,6 +12,7 @@ Settings::Settings(QWidget *parent) : QDialog(parent){
     bgmSlider->setRange(0,100);
     bgmSpinBox->setRange(0,100);
 
+
     sfxLabel = new QLabel(tr("Sound Effects"));
     sfxSlider = new QSlider(Qt::Horizontal);
     sfxSpinBox = new QSpinBox;
@@ -71,6 +72,7 @@ Settings::Settings(QWidget *parent) : QDialog(parent){
     setLayout(mainLayout);
     setWindowModality(Qt::WindowModal);
     setWindowTitle("Settings");
+
 }
 
 void Settings::reject(){
