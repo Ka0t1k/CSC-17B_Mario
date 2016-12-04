@@ -125,7 +125,7 @@ void MainWindow::bgmAdjust(int volume){
 }
 
 void MainWindow::sfxAdjust(int volume){
-    //soundManager->setSFXVolume(volume);
+    soundManager->setSFXVolume(volume);
 }
 
 

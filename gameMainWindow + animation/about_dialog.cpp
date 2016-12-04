@@ -16,12 +16,12 @@ About_Dialog::About_Dialog(QWidget *parent) :
 
     this->mainVBox = new QVBoxLayout;
 
-    this->logo = new QPixmap(":/AD_mario_images/AD_Mario_Logo_Bar.tif");
+    this->logo = new QPixmap(":/images/AD_Mario_Logo_Bar.tif");
     logoLbl = new QLabel;
     logoLbl->setPixmap(*logo);
     logoLbl->setContentsMargins(0,0,0,2);
 
-    this->spacerBar = new QPixmap(":/AD_mario_images/AD_Spacer_Bar.tif");
+    this->spacerBar = new QPixmap(":/images/AD_Spacer_Bar.tif");
     this->spacerLabel = new QLabel;
     spacerLabel->setPixmap(*spacerBar);
     spacerLabel->setContentsMargins(55,8,0,3);

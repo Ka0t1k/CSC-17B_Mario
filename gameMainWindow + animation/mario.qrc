@@ -47,5 +47,23 @@
         <file>images/wallplatform.png</file>
         <file>images/Warp.png</file>
         <file>font/CoinCount2.ttf</file>
+        <file>images/AD_Spacer_Bar.tif</file>
+        <file>images/AD_Mario_Logo_Bar.tif</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>audio/coin.mp3</file>
+        <file>audio/death.mp3</file>
+        <file>audio/ghost.mp3</file>
+        <file>audio/jump.mp3</file>
+        <file>audio/level.mp3</file>
+        <file>audio/level1.mp3</file>
+        <file>audio/levelClear.mp3</file>
+        <file>audio/Select.wav</file>
+        <file>audio/smw_coin.wav</file>
+        <file>audio/smw_course_clear.wav</file>
+        <file>audio/smw_jump.wav</file>
+        <file>audio/smw_lost_a_life.wav</file>
+        <file>audio/ThemeSong.mp3</file>
+        <file>audio/Title.mp3</file>
     </qresource>
 </RCC>
