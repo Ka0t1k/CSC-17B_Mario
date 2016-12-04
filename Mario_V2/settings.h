@@ -2,6 +2,9 @@
 #define SETTINGS_H
 #include "mainwindow.h"
 
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+
 class Settings : public QDialog{
     Q_OBJECT
 public:
@@ -38,6 +41,9 @@ private:
     QPushButton *cancelButton;
     QRadioButton *windowedView;
     QRadioButton *fullScreenView;
+
+    QRegularExpression * userNameRegEx;
+    QRegularExpressionValidator * userNameValidator;
 
 };
 

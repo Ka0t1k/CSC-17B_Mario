@@ -82,6 +82,8 @@ void Ara_Sound_Manager::playSoundEffect(QString which){
         level1->play();
     }
     else if(which == "level_clear"){
+        soundPlayer->stop();
+        level1->stop();
         levelClear->play();
     }
     else if(which == "ghost"){

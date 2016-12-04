@@ -50,5 +50,4 @@
         <file>images/AD_Spacer_Bar.tif</file>
         <file>images/AD_Mario_Logo_Bar.tif</file>
     </qresource>
-    <qresource prefix="/sounds"/>
 </RCC>

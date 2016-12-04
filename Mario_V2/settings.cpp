@@ -2,9 +2,18 @@
 #include <iostream>
 
 Settings::Settings(QWidget *parent) : QDialog(parent){
+    //Ara - set the pattern
+    QString pattern = "^[A-Z][a-z]{1,15}$";
+
+    this->userNameRegEx =  new QRegularExpression(pattern);
+    this->userNameValidator = new QRegularExpressionValidator(*userNameRegEx,this);
+
     label = new QLabel(tr("Player Name: "));
     lineEdit = new QLineEdit;
+    //ARA
+    lineEdit->setValidator(userNameValidator);
     label->setBuddy(lineEdit);
+
 
     bgmLabel = new QLabel(tr("Music"));
     bgmSlider = new QSlider(Qt::Horizontal);
