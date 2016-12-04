@@ -10,6 +10,7 @@ signals:
 public:
     View();
     void sceneSet(QGraphicsScene *);
+    QMediaPlaylist *bgm;
 
 };
 

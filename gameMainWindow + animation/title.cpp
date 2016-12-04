@@ -3,7 +3,17 @@
 Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
 
     viewer = view;
+    scroll = new QScrollBar;
+    scroll = viewer->horizontalScrollBar();
 
+    //ARA
+    /*
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/music/Title.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    selectSFX = new QSoundEffect();
+    selectSFX->setSource(QUrl("qrc:/music/Select.wav"));
+    */
     background = new AnimatedGraphicsItem;
     background->setPixmap(QPixmap(":/images/background.png"));
     foreground = new QGraphicsPixmapItem(QPixmap(":/images/title.png"));
@@ -40,6 +50,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     addItem(quit);
 
     this->setFocus();
+    this->setSceneRect(0,0,1280,720);
     view->sceneSet(this);
 }
 
@@ -66,7 +77,7 @@ void Title::keyPressEvent(QKeyEvent *event){
     }
     if(event->key() == Qt::Key_Z){
         if(selection == 0){
-            scene = new MyScene(viewer);
+            scene = new MyScene(scroll);
             viewer->sceneSet(scene);
         }
         if(selection == 1){

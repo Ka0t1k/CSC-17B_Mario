@@ -1,14 +1,14 @@
 #include "questbox.h"
 #include <QPainter>
-QuestBox::QuestBox(QGraphicsItem *parent)
+
+
+QuestBox::QuestBox(int length,QGraphicsItem *parent)
     : QGraphicsItem(parent)
-      ,mCurrentFrame4()
+      ,mCurrentFrame4(), mLength(length)
 
 {
     setFlag(ItemClipsToShape);
     mPixmap4 = QPixmap(":images/questbox.png");
-    setTransformOriginPoint(boundingRect().center());
-    //startTimer( 100 );
 
 }
 
@@ -22,11 +22,21 @@ void QuestBox::nextFrame4(){
 }
 
 QRectF QuestBox::boundingRect() const {
-    return QRectF(0,0,50,50);
+    return QRectF(0,0,48* mLength,48);
 
 }
 
 void QuestBox::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    painter->drawPixmap(0,0, mPixmap4, mCurrentFrame4, 0,50, 50);
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+    for(int i = 0; i < 50*mLength; ++i) {
+        painter->drawPixmap(i*48,0, mPixmap4, mCurrentFrame4, 0,48, 48);
+    }
     setTransformOriginPoint(boundingRect().center());
+}
+
+
+int QuestBox::type() const
+{
+  return Type;
 }

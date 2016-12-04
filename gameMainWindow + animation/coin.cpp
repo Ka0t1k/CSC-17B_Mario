@@ -1,6 +1,6 @@
 #include "coin.h"
-#include <QDebug>
 #include <QPainter>
+#include<QList>
 
 Coin::Coin(QGraphicsItem *parent)
     : QGraphicsItem(parent)
@@ -8,7 +8,6 @@ Coin::Coin(QGraphicsItem *parent)
 {
     setFlag(ItemClipsToShape);
     mPixmap2 = QPixmap(":images/coin.png");
-    setTransformOriginPoint(boundingRect().center());
 
 }
 
@@ -28,11 +27,13 @@ QRectF Coin::boundingRect() const {
 void Coin::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->drawPixmap(0,0, mPixmap2, mCurrentFrame2, 0,39, 41);
     setTransformOriginPoint(boundingRect().center());
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
 }
 
-/*
-QPoint Coin::pos() const{
 
-    return mPos;
+int Coin::type() const
+{
+  return Type;
 }
-*/

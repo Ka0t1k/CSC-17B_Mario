@@ -8,12 +8,10 @@ Piranha::Piranha(QGraphicsItem *parent)
 {
     setFlag(ItemClipsToShape);
     mPixmap7 = QPixmap(":images/piranha.png");
-    setTransformOriginPoint(boundingRect().center());
-
 
 }
 
-void Piranha::nextFrame7(){
+void Piranha::nextFrame(){
 
     mCurrentFrame7 += 387;
     if (mCurrentFrame7 >= 9286 ) {
@@ -30,4 +28,11 @@ QRectF Piranha::boundingRect() const {
 void Piranha::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->drawPixmap(0,0, mPixmap7, mCurrentFrame7, 0,130, 165);
     setTransformOriginPoint(boundingRect().center());
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
+}
+
+int Piranha::type() const {
+    return Type;
 }

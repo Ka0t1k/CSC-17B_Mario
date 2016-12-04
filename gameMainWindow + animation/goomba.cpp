@@ -1,41 +1,40 @@
 #include "goomba.h"
 #include <QPainter>
 
-Goomba::Goomba(QGraphicsItem *parent)
-    : QGraphicsItem(parent)
-      ,mCurrentFrame3()
-
+Goomba::Goomba(QRectF platformRect, int direction, QGraphicsItem *parent)
+    : QGraphicsItem(parent), mCurrentFrame3(), mPlatform(platformRect), mDirection(direction)
 {
     setFlag(ItemClipsToShape);
     mPixmap3 = QPixmap(":images/goombas.png");
-    setTransformOriginPoint(boundingRect().center());
-    //startTimer( 100 );
-
 }
 
-void Goomba::nextFrame3(){
-
+void Goomba::nextFrame3() {
     mCurrentFrame3 += 54;
     if (mCurrentFrame3 >= 862 ) {
         mCurrentFrame3 = 0;
-        //mPos.setX( mPos.x() + 5);
     }
+
+    if(this->pos().x() < mPlatform.x() || this->pos().x() > mPlatform.x()+ mPlatform.width()) {
+        mDirection = -mDirection;
+        setTransform(QTransform(-mDirection, 0, 0, 1, boundingRect().width(), 0));
+    }
+    setPos(this->pos().x() + (mDirection*7), this->pos().y());
 }
 
 QRectF Goomba::boundingRect() const {
     return QRectF(0,0,52,50);
-
 }
 
 void Goomba::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->drawPixmap(0,0, mPixmap3, mCurrentFrame3, 0,52, 50);
     setTransformOriginPoint(boundingRect().center());
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
 }
 
-/*
-QPoint Goomba::pos() const{
-
-    return mPos;
+int Goomba::type() const {
+    return Type;
 }
 
-*/
+

@@ -19,43 +19,88 @@ SOURCES += main.cpp\
            settings.cpp \
            title.cpp \
            view.cpp \
-    placeholderscene.cpp \
     backgrounditem.cpp \
+    bomb.cpp \
+    brickplatform.cpp \
     castle.cpp \
     coin.cpp \
-    glowbrick.cpp \
+    coincounter.cpp \
+    conveyor.cpp \
+    flag.cpp \
+    giantgoomba.cpp \
     goomba.cpp \
     myscene.cpp \
+    notebox.cpp \
     piranha.cpp \
     player.cpp \
     questbox.cpp \
+    redturtle.cpp \
+    score.cpp \
+    spiny.cpp \
+    stairblock.cpp \
+    stretch.cpp \
+    timer.cpp \
     turtle.cpp \
-    about_dialog.cpp \
-    ara_sound_manager.cpp
+    wallplatform.cpp \
+    warptube.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
             title.h \
             view.h \
-    placeholderscene.h \
+    LibHeaders/about_dialog.h \
+    LibHeaders/ara_sound_manager.h \
     backgrounditem.h \
+    bomb.h \
+    brickplatform.h \
     castle.h \
     coin.h \
-    glowbrick.h \
+    coincounter.h \
+    conveyor.h \
+    flag.h \
+    giantgoomba.h \
     goomba.h \
     myscene.h \
+    notebox.h \
+    objecttype.h \
     piranha.h \
     player.h \
     questbox.h \
+    redturtle.h \
+    score.h \
+    spiny.h \
+    stairblock.h \
+    stretch.h \
+    timer.h \
     turtle.h \
-    about_dialog.h \
-    ara_sound_manager.h
+    wallplatform.h \
+    warptube.h
 
-FORMS    += \
-    about_dialog.ui \
-    ara_sound_manager.ui
+FORMS    +=
 
 RESOURCES += \
-    mario.qrc \
-    images/AD_mario.qrc \
-    music/ara_sound_rsc.qrc
+    mario.qrc
+
+#Libraries Headers Path
+INCLUDEPATH += $$PWD/LibHeaders
+DEPENDPATH += $$PWD/LibHeaders
+
+#------------------------------------------------------------#
+#-----------------------Mac Libraries------------------------#
+#------------------------------------------------------------#
+macx: LIBS += -L$$PWD/'MacLib/' -lAra_About_Dialog
+macx: PRE_TARGETDEPS += $$PWD/'MacLib/libAra_About_Dialog.a'
+
+macx: LIBS += -L$$PWD/'MacLib/' -lAra_Sound_Manager
+macx: PRE_TARGETDEPS += $$PWD/'MacLib/libAra_Sound_Manager.a'
+
+#------------------------------------------------------------#
+#-----------------------Win Libraries------------------------#
+#------------------------------------------------------------#
+win32: LIBS += -L$$PWD/'WinLib/' -lAra_About_Dialog
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/Ara_About_Dialog.lib'
+else:win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/libAra_About_Dialog.a'
+
+win32: LIBS += -L$$PWD/'WinLib/' -lAra_Sound_Manager
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/Ara_Sound_Manager.lib'
+else:win32-g++: PRE_TARGETDEPS += $$PWD/'WinLib/libAra_Sound_Manager.a'

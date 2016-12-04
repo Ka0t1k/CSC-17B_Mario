@@ -1,8 +1,8 @@
 #ifndef CASTLE_H
 #define CASTLE_H
-
 #include <QObject>
 #include <QGraphicsPixmapItem>
+#include "objecttype.h"
 
 
 class Castle : public QObject, public QGraphicsPixmapItem
@@ -12,13 +12,10 @@ class Castle : public QObject, public QGraphicsPixmapItem
 
 public:
      explicit Castle(QGraphicsItem *parent = 0);
-     enum { Type = UserType + 1 };
-         int type() const;
-
+     enum { Type = UserType + castleType };
+     int type() const;
 
 private:
-
-
 
 };
 

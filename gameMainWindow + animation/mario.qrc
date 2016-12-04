@@ -1,41 +1,51 @@
 <RCC>
     <qresource prefix="/">
         <file>images/title.png</file>
-        <file>music/ThemeSong.mp3</file>
         <file>images/logo.png</file>
         <file>images/icon.ico</file>
-        <file>music/Title.mp3</file>
         <file>images/Mario_Logo_Bar.tif</file>
         <file>images/Mario_Logo.tif</file>
         <file>images/Spacer_Bar.tif</file>
         <file>images/cursor.png</file>
         <file>font/SuperMario256.ttf</file>
-        <file>music/Select.wav</file>
         <file>images/background.png</file>
-        <file>images/brick.png</file>
+        <file>images/bomb.png</file>
+        <file>images/brick3.png</file>
+        <file>images/c2.png</file>
         <file>images/castle.png</file>
-        <file>images/cluster2.png</file>
-        <file>images/cluster3.png</file>
-        <file>images/cluster4.png</file>
-        <file>images/cluster5.png</file>
-        <file>images/cluster6.png</file>
-        <file>images/cluster7.png</file>
-        <file>images/cluster8.png</file>
-        <file>images/cluster9.png</file>
+        <file>images/clock.png</file>
         <file>images/coin.png</file>
+        <file>images/conveyorR.png</file>
+        <file>images/count.png</file>
         <file>images/flag.png</file>
+        <file>images/gameovers.png</file>
+        <file>images/goomba.png</file>
         <file>images/goombas.png</file>
         <file>images/ground.png</file>
-        <file>images/groundx.png</file>
         <file>images/hcastle.png</file>
         <file>images/logo2.png</file>
-        <file>images/mario_walk_2.png</file>
+        <file>images/mario.png</file>
+        <file>images/mario_jump.png</file>
         <file>images/mariosplash.png</file>
+        <file>images/mariostop.png</file>
+        <file>images/mflag.png</file>
+        <file>images/notebox.png</file>
         <file>images/piranha.png</file>
         <file>images/questbox.png</file>
+        <file>images/redt.png</file>
         <file>images/Scene.png</file>
+        <file>images/scoretext.png</file>
+        <file>images/sign.png</file>
         <file>images/sky.png</file>
+        <file>images/spiny.png</file>
+        <file>images/stairblock.png</file>
         <file>images/turtle.png</file>
+        <file>images/ustretch.png</file>
+        <file>images/wallf2.png</file>
+        <file>images/wallg.png</file>
+        <file>images/walli.png</file>
+        <file>images/wallplatform.png</file>
         <file>images/Warp.png</file>
+        <file>font/CoinCount2.ttf</file>
     </qresource>
 </RCC>

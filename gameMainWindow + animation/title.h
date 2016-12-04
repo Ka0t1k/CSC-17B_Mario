@@ -4,7 +4,6 @@
 #include "mainwindow.h"
 #include "myscene.h"
 class View;
-class placeHolderScene;
 
 class AnimatedGraphicsItem : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -34,6 +33,7 @@ private:
     QGraphicsTextItem *quit;
     QMediaPlaylist *playlist;
     QPropertyAnimation *animation;
+    QScrollBar *scroll;
     MyScene *scene;
 };
 

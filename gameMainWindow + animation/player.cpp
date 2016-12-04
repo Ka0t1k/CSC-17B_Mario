@@ -4,18 +4,47 @@
 
 Player::Player(QGraphicsItem *parent)
     : QGraphicsItem(parent)
-    ,m_direction(0),mCurrentFrame()
+    ,m_direction(0),mCurrentFrame(), mState(Standing)
 {
     setFlag(ItemClipsToShape);
-    mPixmap = QPixmap(":images/mario_walk_2.png");
-    setTransformOriginPoint(boundingRect().center());
+    mWalkPixmap = QPixmap(":images/mario.png");
+    mStandingPixmap = QPixmap(":images/mariostop.png");
+    mJumpPixmap = QPixmap(":images/mario_jump.png");
+    mPixmap = mWalkPixmap;
 }
 
+void Player::stand() {
+    mPixmap = mStandingPixmap;
+    mCurrentFrame = 0;
+    mState = Standing;
 
-int Player::direction() const
-{
+}
+
+void Player::jump() {
+    mState = Jumping;
+}
+
+void Player::walk() {
+    qDebug() << "Walking..";
+    if(mState == Walking) {
+        return;
+    }
+
+    mPixmap = mWalkPixmap;
+    mCurrentFrame = 0;
+    mState = Walking;
+}
+
+void Player::fall() {
+    mState = Falling;
+}
+
+bool Player::isFalling() {
+    return mState == Falling;
+}
+
+int Player::direction() const {
     return m_direction;
-
 }
 
 void Player::nextFrame(){
@@ -26,16 +55,18 @@ void Player::nextFrame(){
 }
 
 QRectF Player::boundingRect() const {
-    return QRectF(0,0,45,62);
-
+    return QRectF(0,0,45,73);
 }
 
 void Player::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    painter->drawPixmap(0,0, mPixmap, mCurrentFrame, 0,45, 62);
+    painter->drawPixmap(0,0, mPixmap, mCurrentFrame, 0,45, 73);
     setTransformOriginPoint(boundingRect().center());
+    Q_UNUSED(widget);
+    Q_UNUSED(option);
+
 }
 
-void Player::addDirection(int direction){
+void Player::addDirection(int direction) {
 
     if (direction == m_direction)
         return;
@@ -49,5 +80,31 @@ void Player::addDirection(int direction){
         else//moving right restore normal state by assigning an empty Qtransform object which is an idetntity matrix
             setTransform(QTransform());
     }
+}
+
+bool Player::isTouchingFoot(QGraphicsItem *item) {
+    //Foot area
+    QRectF rect(pos().x(), (pos().y() + boundingRect().height()) -5, boundingRect().width(), 5);
+    QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
+    qDebug() << "isTouchingFoot:" << rect.intersects(otherRect);
+    return rect.intersects(otherRect);
+}
+
+bool Player::isTouchingHead(QGraphicsItem *item) {
+    //Foot area
+    QRectF rect(pos().x(), pos().y(), boundingRect().width(), 5);
+    QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
+    qDebug() << "isTouchingHead:" << rect.intersects(otherRect);
+    return rect.intersects(otherRect);
+}
+
+bool Player::isTouchingPlatform(QGraphicsItem *item) {
+    QRectF rect(pos().x(), (pos().y() + boundingRect().height()) - 5, boundingRect().width(), 10);
+    QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
+    qDebug() << rect;
+    qDebug() << otherRect;
+    qDebug() << otherRect.intersects(rect);
+    qDebug() << "isTouchingPlatform:" << rect.intersects(otherRect);
+    return rect.intersects(otherRect);
 }
 
