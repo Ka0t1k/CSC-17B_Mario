@@ -71,6 +71,7 @@ private slots:
 
 signals:
     void jumpFactorChanged(qreal);
+    void playSound(QString);
 
 private:
     void initPlayField();
@@ -309,10 +310,8 @@ private:
 
     Spiny *m_spiny;
 
-    QMediaPlayer *jumpSound;
     QGraphicsItem *m_platform;
     QScrollBar *scroll;
-    QMediaPlayer *coinSound;
 
     QMediaPlayer *music;
     QMediaPlayer *death;

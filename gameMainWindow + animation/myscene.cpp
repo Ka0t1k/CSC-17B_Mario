@@ -61,6 +61,7 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     mFallTimer.setInterval(20);
     connect(&mFallTimer, &QTimer::timeout, this, &MyScene::fallPlayer);
 
+    /* //ARA - unnecessary
     //Jump sound fx
     jumpSound = new QMediaPlayer();
     jumpSound->setMedia(QUrl("qrc:/audio/jump.mp3"));
@@ -68,7 +69,7 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     //Coin sound fx
     coinSound = new QMediaPlayer();
     coinSound->setMedia(QUrl("qrc:/audio/coin.mp3"));
-
+    */
     //Level Music
     music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/audio/level1.mp3"));
@@ -93,6 +94,8 @@ MyScene::MyScene(QScrollBar* s, QObject *parent) :
     m_jumpAnimation->setEasingCurve(QEasingCurve::OutInQuad);
     connect(this, &MyScene::jumpFactorChanged, this, &MyScene::jumpPlayer);
     connect(m_jumpAnimation, &QPropertyAnimation::stateChanged, this, &MyScene::jumpStatusChanged);
+    //ARA
+    QObject::connect(this, SIGNAL(playSound(QString)),this->parent(),SIGNAL(playSound(QString)));
 }
 
 void MyScene::keyPressEvent(QKeyEvent *event)
@@ -116,12 +119,15 @@ void MyScene::keyPressEvent(QKeyEvent *event)
             m_jumpAnimation->start();
             qDebug() << "space pressed; animatnio start";
 
+            /*//ARA
             if (jumpSound->state() == QMediaPlayer::PlayingState){
                jumpSound->setPosition(0);
            }
            else if (jumpSound->state() == QMediaPlayer::StoppedState){
                jumpSound->play();
            }
+           */
+            emit this->playSound("mario_jump");
             //m_timer.start();
         }
         break;
@@ -1371,12 +1377,15 @@ void MyScene::checkCollidingCoin() {
             removeItem(c);
             m_count->increase();
             m_score->increase();
+            /* //ARA
             if (coinSound->state() == QMediaPlayer::PlayingState){
                 coinSound->setPosition(0);
             }
             else if (coinSound->state() == QMediaPlayer::StoppedState){
                 coinSound->play();
             }
+            */
+            emit this->playSound("coin");
         }
     }
 }

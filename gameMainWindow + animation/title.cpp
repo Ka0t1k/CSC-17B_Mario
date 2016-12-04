@@ -52,6 +52,7 @@ Title::Title(View *view, QWidget *parent) : QGraphicsScene(parent){
     this->setFocus();
     this->setSceneRect(0,0,1280,720);
     view->sceneSet(this);
+
 }
 
 void Title::keyPressEvent(QKeyEvent *event){
@@ -77,8 +78,10 @@ void Title::keyPressEvent(QKeyEvent *event){
     }
     if(event->key() == Qt::Key_Z){
         if(selection == 0){
-            scene = new MyScene(scroll);
+            //ARA - added the this pointer to the scene init
+            scene = new MyScene(scroll,this);
             viewer->sceneSet(scene);
+
         }
         if(selection == 1){
             qApp->exit();

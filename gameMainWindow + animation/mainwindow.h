@@ -93,6 +93,10 @@ private:
 
 signals:
     void playSound(QString);
+
+
 };
+
+
 
 #endif // MAINWINDOW_H
