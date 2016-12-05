@@ -81,7 +81,7 @@ bool LoginWindow::regUsr(Query Input){
     QSqlQuery Q(db);
     if(chkUsr(Input)){
     //Define SQL Query
-        insert="INSERT INTO users(username,password) VALUES (" + Input.uName+", SHA1("+ Input.pass+"))";
+        insert="INSERT INTO mario_table (username,password) VALUES ('"+Input.uName+"', SHA1('"+Input.pass+"'))";
         Q.exec(insert);
         return true;
     }
@@ -97,7 +97,7 @@ bool LoginWindow::chkUsr(Query Input){
 //Setup a boolean
     bool valid=true;
 //Define the Query
-    select="SELECT username FROM users WHERE username='"+Input.uName+"'";
+    select="SELECT username FROM mario_table WHERE username='"+Input.uName+"'";
     Q.exec(select);
     if(Q.size()==1){
         //Username Taken
