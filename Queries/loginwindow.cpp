@@ -39,9 +39,21 @@ void LoginWindow::connectDatabase()
 
 void LoginWindow::on_pushButton_clicked()
 {
-
+//Connect ot Database
     connectDatabase();
-
+//Gather Input
+    Query uInput;
+    uInput.uName=ui->USERNAME->text();
+    uInput.pass=ui->PASSWORD->text();
+    qDebug() << uInput.uName;
+    qDebug() << uInput.pass;
+//Try to Register User
+    if(regUsr(uInput)){
+        //Then it worked
+    }
+    else{
+        //Then it didnt
+    }
 }
 
 Connection LoginWindow::createConnection(){
@@ -63,17 +75,18 @@ Connection LoginWindow::createConnection(){
 }
 
 //Register User
-void LoginWindow::regUser(Query Input){
+bool LoginWindow::regUsr(Query Input){
 //Check user input against the database
     QString insert;
     QSqlQuery Q(db);
     if(chkUsr(Input)){
     //Define SQL Query
-        insert="INSERT INTO users VALUES (" + Input.uName+", SHA1("+ Input.pass+"))";
+        insert="INSERT INTO users(username,password) VALUES (" + Input.uName+", SHA1("+ Input.pass+"))";
         Q.exec(insert);
+        return true;
     }
     else{
-        //Bad Input
+        return false;
     }
 
 }

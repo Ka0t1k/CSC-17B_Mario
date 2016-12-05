@@ -19,7 +19,7 @@ struct Connection{
 //SQL Query
 struct Query{
     QString uName;
-    char pass[40];
+    QString pass;
 };
 
 class LoginWindow : public QDialog
@@ -31,7 +31,7 @@ public:
     explicit LoginWindow(QWidget *parent = 0);
     ~LoginWindow();
     void connectDatabase();
-    void regUser(Query);
+    bool regUsr(Query);
     bool chkUsr(Query);
     Connection createConnection();
 private slots:
