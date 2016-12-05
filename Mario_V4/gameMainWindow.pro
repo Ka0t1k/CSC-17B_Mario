@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     warptube.cpp \
     about_dialog.cpp \
     ara_sound_manager.cpp \
-    loginwindow.cpp
+    loginwindow.cpp \
+    aranetworkclass.cpp
 
 HEADERS  += mainwindow.h \
             settings.h \
@@ -80,7 +81,8 @@ HEADERS  += mainwindow.h \
     warptube.h \
     about_dialog.h \
     ara_sound_manager.h \
-    loginwindow.h
+    loginwindow.h \
+    aranetworkclass.h
 
 FORMS    += \
     about_dialog.ui \

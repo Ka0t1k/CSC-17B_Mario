@@ -30,8 +30,12 @@
 #include <QStatusBar>
 #include <QStyle>
 
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+
 #include "ara_sound_manager.h"
 #include "about_dialog.h"
+#include "aranetworkclass.h"
 
 #include "settings.h"
 #include "title.h"
@@ -60,6 +64,7 @@ private slots:
     void bgmAdjust(int);
     void sfxAdjust(int);
     void showAbout();
+    void processNetworkData(QByteArray);
 private:
     void createActions();
     void createMenus();
@@ -90,6 +95,8 @@ private:
     QMenu *helpMenu;
 
     Ara_Sound_Manager *soundManager;
+    AraNetworkClass * networkManager;
+    QRegularExpression * myRegEx;
 
 signals:
     void playSound(QString);
