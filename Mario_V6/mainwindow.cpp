@@ -10,6 +10,11 @@ MainWindow::MainWindow(){
     //playSoundEffect is a public slot so it can be called.
     soundManager->playSoundEffect("theme");
 
+    this->myRegEx = new QRegularExpression("Imperial\\\":{\\\"Value\\\":\\d\\d.\\d");
+    this->networkManager = new AraNetworkClass;
+    connect(networkManager, SIGNAL(dataReadyRead(QByteArray)), this, SLOT(processNetworkData(QByteArray)));
+    networkManager->makeRequest("http://dataservice.accuweather.com/currentconditions/v1/337309?apikey=UdnxXbWuQP646A0by9ETrGH6HYVPmPgy");
+
     createActions();
     createMenus();
     createScene();
@@ -133,4 +138,20 @@ void MainWindow::sfxAdjust(int volume){
 void MainWindow::showAbout(){
     about = new About_Dialog;
     about->exec();
+}
+
+
+void MainWindow::processNetworkData(QByteArray data){
+    QString temperature = "";
+    QRegularExpressionMatch myRegExMatch = this->myRegEx->match(data);
+    temperature = myRegExMatch.captured(0);
+    this->myRegEx->setPattern("\\d\\d.\\d");
+    myRegExMatch = myRegEx->match(temperature);
+    temperature = myRegExMatch.captured(0);
+    if(data.toDouble() > 70){
+        this->statusBar()->showMessage(QString("The current temperature is " + temperature + "°, get outside!"));
+    }
+    else{
+        this->statusBar()->showMessage(QString("The current temperature is " + temperature + "°, fuck it's cold!"));
+    }
 }
