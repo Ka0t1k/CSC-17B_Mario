@@ -27,8 +27,8 @@ private:
 
     QLabel * schoolInfo, * classInfo, * groupMember1,
            * groupMember2, * groupMember3, * groupMember4,
-           * groupMember5, * groupMember6, * groupMember7,
-           * groupMember8, * logoLbl, * spacerLabel;
+           //* groupMember5, * groupMember6, * groupMember7,
+           /** groupMember8,*/ * logoLbl, * spacerLabel;
 
     QPixmap * logo, * spacerBar;
 

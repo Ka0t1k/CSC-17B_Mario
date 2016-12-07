@@ -10,7 +10,7 @@ About_Dialog::About_Dialog(QWidget *parent) :
     ui->setupUi(this);
 
     //this->setMaximumWidth(350);
-    this->setFixedSize(350,530);
+    this->setFixedSize(320,445);
 
     this->setWindowTitle("Mario: About");
 
@@ -32,10 +32,10 @@ About_Dialog::About_Dialog(QWidget *parent) :
     this->groupMember2 = new QLabel;
     this->groupMember3 = new QLabel;
     this->groupMember4 = new QLabel;
-    this->groupMember5 = new QLabel;
-    this->groupMember6 = new QLabel;
-    this->groupMember7 = new QLabel;
-    this->groupMember8 = new QLabel;
+    //this->groupMember5 = new QLabel;
+    //this->groupMember6 = new QLabel;
+    //this->groupMember7 = new QLabel;
+    //this->groupMember8 = new QLabel;
 
     this->setLayout(mainVBox);
     mainVBox->setAlignment(Qt::AlignTop | Qt::AlignCenter);
@@ -50,10 +50,10 @@ About_Dialog::About_Dialog(QWidget *parent) :
     mainVBox->addWidget(groupMember2);
     mainVBox->addWidget(groupMember3);
     mainVBox->addWidget(groupMember4);
-    mainVBox->addWidget(groupMember5);
-    mainVBox->addWidget(groupMember6);
-    mainVBox->addWidget(groupMember7);
-    mainVBox->addWidget(groupMember8);
+    //mainVBox->addWidget(groupMember5);
+    //mainVBox->addWidget(groupMember6);
+    //mainVBox->addWidget(groupMember7);
+    //mainVBox->addWidget(groupMember8);
 
     schoolInfo->show();
     schoolInfo->setAlignment(Qt::AlignCenter);
