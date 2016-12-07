@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>audio/level1.mp3</file>
+        <file>audio/ThemeSong.mp3</file>
+        <file>audio/jump.wav</file>
+        <file>audio/levelClear.wav</file>
+        <file>audio/Select.wav</file>
+        <file>audio/coin.wav</file>
+        <file>audio/death.wav</file>
+        <file>audio/ghost.wav</file>
+    </qresource>
+</RCC>
