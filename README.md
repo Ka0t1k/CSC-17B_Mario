@@ -11,21 +11,13 @@ MyScene handles all of the game functionality.
 
 GameMainWindow
 	-about_dialog
-
 	-ara_sound_manager
-
 	-aranetworkclass
-
 	-loginwindow
-
-		-database
-
+	-database
 	-myscene
-
 	-settings
-
 	-title
-
 	-view
 
 
