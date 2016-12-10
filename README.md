@@ -8,13 +8,13 @@ GameMainWindow handles all of the main window functions and the view
 
 MyScene handles all of the game functionality. 
 
-
+```
 GameMainWindow
 	-about_dialog
 	-ara_sound_manager
 	-aranetworkclass
 	-loginwindow
-	-database
+		-database
 	-myscene
 	-settings
 	-title
@@ -23,52 +23,29 @@ GameMainWindow
 
 
 MyScene
-
 	-backgrounditem
-
 	-bomb
-
 	-brickplatform
-
 	-castle
-
 	-coin
-
 	-coincounter
-
 	-
-
 	-flag
-
 	-giantgoomba
-
 	-goomba
-
 	-notebox
-
 	-piranha
-
 	-player
-
 	-questbox
-
 	-redturtle
-
 	-score
-
 	-spiny
-
 	-stairblock
-
 	-stretch
-
 	-timer
-
 	-turtle
-
 	-wallplatform
-
 	-warptube
-	
+```
 
 
